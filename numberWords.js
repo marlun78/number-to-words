@@ -4,6 +4,7 @@ module.exports = numberWords;
 
 // TODO: Write tests - not 100% yet
 // TODO: Minimize calls (MAX takes 32 calls)
+// TODO: Add support for “st”, “nd”, “rd” and “th”
 
 var TEN             = 10;
 var ONE_HUNDRED     = 100;
