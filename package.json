@@ -1,0 +1,8 @@
+{
+    "name": "number-words",
+    "description": "Converts a number to words",
+    "author": "marlun78",
+    "dependencies": {
+    },
+    "version": "0.1.0"
+}
