@@ -1,3 +1,6 @@
 'use strict'; 
 
-module.exports = require('./number-words');
+module.exports = {
+    numberToWords: require('./numberToWords'),
+    numberWordsToOrdinal: require('./numberWordsToOrdinal')
+};

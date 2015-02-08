@@ -1,8 +1,8 @@
 'use strict';
 
-var numberWords = require('../src/number-words');
+var numberToWords = require('../src/numberToWords');
 
-describe('numberWords', function () {
+describe('numberToWords', function () {
     var tests = [
         { input: 0, expect: 'zero' },
         { input: 1, expect: 'one' },
@@ -52,7 +52,7 @@ describe('numberWords', function () {
     
     function addTest(test) {
         it('should, if passed ' + formatNumber(test.input) + ', return ' + test.expect, function () {
-            expect(numberWords(test.input)).toEqual(test.expect);
+            expect(numberToWords(test.input)).toEqual(test.expect);
         });
     }
 
