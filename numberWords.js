@@ -2,7 +2,6 @@
 
 module.exports = numberWords;
 
-// TODO: Move to own repo
 // TODO: Write tests - not 100% yet
 // TODO: Minimize calls (MAX takes 32 calls)
 
