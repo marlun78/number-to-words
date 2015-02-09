@@ -2,7 +2,7 @@
 
 module.exports = numberToWords;
 
-// TODO: Minimize calls (MAX takes 32 calls)
+// TODO: Performance optimizations (MAX takes 32 calls)
 
 var numberWordsToOrdinal = require('./numberWordsToOrdinal');
 
