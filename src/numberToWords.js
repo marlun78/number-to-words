@@ -3,6 +3,7 @@
 module.exports = numberToWords;
 
 // TODO: Performance optimizations (MAX takes 32 calls)
+// TODO: Add commas and dashes (like; nine quadrillion, seven trillion, one hundred ninety-nine billion, two hundred fifty-four million, seven hundred forty thousand, nine hundred ninety-two dollars)
 
 var numberWordsToOrdinal = require('./numberWordsToOrdinal');
 
