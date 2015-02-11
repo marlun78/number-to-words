@@ -1,7 +1,7 @@
 {
     "name": "number-to-words",
     "description": "Convert numbers into words",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "author": "Martin Eneqvist <marlun78@hotmail.com> (https://github.com/marlun78)",
     "homepage": "https://github.com/marlun78",
     "repository": {
@@ -14,6 +14,8 @@
     "keywords": [
         "convert",
         "converter",
+        "number",
+        "numbers",
         "ordinal",
         "string",
         "strings",
