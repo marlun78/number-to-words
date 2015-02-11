@@ -1,12 +1,32 @@
 {
-    "name": "number-words",
+    "name": "numbers-to-words",
     "description": "Converts numbers into words",
-    "author": "marlun78",
+    "version": "1.0.0",
+    "author": "Martin Eneqvist <marlun78@hotmail.com> (https://github.com/marlun78)",
+    "homepage": "https://github.com/marlun78",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/marlun78/numbers-to-words.js"
+    },
+    "bugs": {
+        "url": "https://github.com/marlun78/numbers-to-words.js/issues"
+    },
+    "keywords": [
+        "convert",
+        "converter",
+        "ordinal",
+        "string",
+        "strings",
+        "tool",
+        "tools",
+        "word",
+        "words"
+    ],
+    "main": "./src",
     "scripts": {
         "test": "jasmine"
     },
     "devDependencies": {
         "jasmine": "^2.2.1"
-    },
-    "version": "0.1.0"
+    }
 }

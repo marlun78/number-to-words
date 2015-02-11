@@ -2,8 +2,6 @@
 
 module.exports = numberToWords;
 
-// TODO: Performance optimizations (MAX takes 32 calls)
-
 var numberWordsToOrdinal = require('./numberWordsToOrdinal');
 
 var TEN = 10;
@@ -31,10 +29,11 @@ if (typeof Number.isFinite !== 'function') {
 }
 
 function numberToWords(number, asOrdinal) {
+    var words;
     if (!Number.isFinite(number)) {
-        throw TypeError;
+        throw new TypeError('Not a finite number');
     }
-    var words = toWords(number);
+    words = toWords(number);
     return asOrdinal ? numberWordsToOrdinal(words) : words;
 }
 
