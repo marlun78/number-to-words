@@ -1,10 +1,12 @@
 {
-  "name": "number-words",
-  "description": "Converts a number to words",
-  "author": "marlun78",
-  "dependencies": {},
-  "version": "0.1.0",
-  "devDependencies": {
-    "jasmine": "^2.2.1"
-  }
+    "name": "number-words",
+    "description": "Converts numbers into words",
+    "author": "marlun78",
+    "scripts": {
+        "test": "jasmine"
+    },
+    "devDependencies": {
+        "jasmine": "^2.2.1"
+    },
+    "version": "0.1.0"
 }

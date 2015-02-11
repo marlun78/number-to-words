@@ -72,6 +72,16 @@ describe('numberToWords', function () {
     }
 
     tests.forEach(addTest);
+
+    it('should return the number with an ordinal word if passed a second truthy argument', function () {
+        expect(numberToWords(1, true)).toEqual('first');
+        expect(numberToWords(2, true)).toEqual('second');
+        expect(numberToWords(3, true)).toEqual('third');
+        expect(numberToWords(10, true)).toEqual('tenth');
+        expect(numberToWords(17, true)).toEqual('seventeenth');
+        expect(numberToWords(30, true)).toEqual('thirtieth');
+        expect(numberToWords(123, true)).toEqual('one hundred twenty-third');
+    });
 });
 
 function formatNumber(number) {
