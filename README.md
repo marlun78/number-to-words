@@ -1,9 +1,8 @@
 # Number To Words
-Converts numbers into words
+Converts numbers into words.
 
-Simple:
 ```JavaScript
-var numberConverter = require('numbers-to-words');
+var numberConverter = require('number-to-words');
 numberConverter.toWords(13);
 // “thirteen”
 ```
