@@ -29,3 +29,5 @@ numberConverter.toWords(21, true);
 ```
 
 
+### Comments / Bugs
+Comments and bug reports are much appreciated. Please enter them on the [issues page](https://github.com/marlun78/number-to-words/issues). Thanks!
