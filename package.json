@@ -1,15 +1,15 @@
 {
-    "name": "numbers-to-words",
-    "description": "Converts numbers into words",
+    "name": "number-to-words",
+    "description": "Convert numbers into words",
     "version": "1.0.0",
     "author": "Martin Eneqvist <marlun78@hotmail.com> (https://github.com/marlun78)",
     "homepage": "https://github.com/marlun78",
     "repository": {
         "type": "git",
-        "url": "https://github.com/marlun78/numbers-to-words.js"
+        "url": "https://github.com/marlun78/number-to-words"
     },
     "bugs": {
-        "url": "https://github.com/marlun78/numbers-to-words.js/issues"
+        "url": "https://github.com/marlun78/number-to-words/issues"
     },
     "keywords": [
         "convert",
