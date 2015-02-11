@@ -1,6 +1,12 @@
 # Number To Words
 Converts numbers into words.
 
+
+### Install
+`npm install number-to-words`
+
+
+### Usage
 ```JavaScript
 var numberConverter = require('number-to-words');
 numberConverter.toWords(13);
@@ -21,3 +27,5 @@ numberConverter.toWords(9007199254740992);
 numberConverter.toWords(21, true);
 // “twenty-first”
 ```
+
+
