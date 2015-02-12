@@ -1,16 +1,24 @@
 {
     "name": "number-to-words",
-    "description": "Convert numbers into words",
     "version": "1.0.1",
-    "author": "Martin Eneqvist <marlun78@hotmail.com> (https://github.com/marlun78)",
-    "homepage": "https://github.com/marlun78",
+    "description": "Convert numbers into words",
+    "main": "./src",
+    "devDependencies": {
+        "jasmine": "^2.2.1"
+    },
+    "scripts": {
+        "test": "jasmine"
+    },
     "repository": {
         "type": "git",
         "url": "https://github.com/marlun78/number-to-words"
     },
+    "author": "Martin Eneqvist <marlun78@hotmail.com> (https://github.com/marlun78)",
+    "license": "MIT",
     "bugs": {
         "url": "https://github.com/marlun78/number-to-words/issues"
     },
+    "homepage": "https://github.com/marlun78/number-to-words",
     "keywords": [
         "convert",
         "converter",
@@ -23,12 +31,5 @@
         "tools",
         "word",
         "words"
-    ],
-    "main": "./src",
-    "scripts": {
-        "test": "jasmine"
-    },
-    "devDependencies": {
-        "jasmine": "^2.2.1"
-    }
+    ]
 }
