@@ -1,7 +1,7 @@
 {
     "name": "number-to-words",
     "version": "1.1.0",
-    "description": "Convert numbers into words",
+    "description": "Contains some util methods for converting numbers into words, ordinal words and ordinal numbers.",
     "main": "./src",
     "devDependencies": {
         "jasmine": "^2.2.1"
