@@ -1,5 +1,7 @@
 'use strict'; 
 
 module.exports = {
-    toWords: require('./numberToWords')
+    toOrdinal: require('./toOrdinal'),
+    toWords: require('./toWords'),
+    toWordsOrdinal: require('./toWordsOrdinal')
 };
