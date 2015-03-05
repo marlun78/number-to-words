@@ -14,18 +14,23 @@ ordinal numbers.
 
 ### API
 
-##### `toOrdinal(number)`
-Converts a number to its ordinal equivalent.
+#### `toOrdinal(number)`
+Converts an integer into a string with an ordinal postfix.
+If number is decimal, the decimals will be removed.
 ```js
 var converter = require('number-to-words');
 converter.toOrdinal(21); // => “21st”
 ```
 
-##### `toWords(number)`
-Converts a number to its ordinal equivalent.
+#### `toWords(number)`
+Converts an integer into words.
+If number is decimal, the decimals will be removed.
 ```js
 var converter = require('number-to-words');
 converter.toWords(13); // => “thirteen”
+
+// Decimal numbers:
+converter.toWords(2.9); // => “two”
 
 // Negative numbers:
 converter.toWords(-3); // => “minus three”
@@ -34,8 +39,9 @@ converter.toWords(-3); // => “minus three”
 converter.toWords(9007199254740992); // => “nine quadrillion, seven trillion, one hundred ninety-nine billion, two hundred fifty-four million, seven hundred forty thousand, nine hundred ninety-two”
 ```
 
-##### `toWordsOrdinal(number)`
-Converts a number to its ordinal equivalent.
+#### `toWordsOrdinal(number)`
+Converts a number into ordinal words.
+If number is decimal, the decimals will be removed.
 ```js
 var converter = require('number-to-words');
 converter.toWordsOrdinal(21); // => “twenty-first”

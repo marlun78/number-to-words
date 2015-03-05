@@ -5,7 +5,7 @@ var isFinite = require('./isFinite');
 module.exports = toOrdinal;
 
 /**
- * Converts an integer into its ordinal equivalent.
+ * Converts an integer into a string with an ordinal postfix.
  * If number is decimal, the decimals will be removed.
  * @example toOrdinal(12) => '12th'
  * @param {number} number
