@@ -1,12 +1,13 @@
 'use strict';
 
-var numberToWords = require('../src/numberToWords');
+var toWords = require('../src/toWords');
 
-describe('numberToWords', function () {
+describe('toWords', function () {
     var tests = [
         { input: -1, expect: 'minus one' },
         { input: 0, expect: 'zero' },
         { input: 1, expect: 'one' },
+        { input: 1.9, expect: 'one' },
         { input: 2, expect: 'two' },
         { input: 3, expect: 'three' },
         { input: 4, expect: 'four' },
@@ -67,20 +68,21 @@ describe('numberToWords', function () {
     
     function addTest(test) {
         it('should, if passed ' + formatNumber(test.input) + ', return ' + test.expect, function () {
-            expect(numberToWords(test.input)).toEqual(test.expect);
+            expect(toWords(test.input)).toEqual(test.expect);
         });
     }
 
     tests.forEach(addTest);
 
+    // Note! This is deprecated, use toWordsOrdinal() instead!
     it('should return the number with an ordinal word if passed a second truthy argument', function () {
-        expect(numberToWords(1, true)).toEqual('first');
-        expect(numberToWords(2, true)).toEqual('second');
-        expect(numberToWords(3, true)).toEqual('third');
-        expect(numberToWords(10, true)).toEqual('tenth');
-        expect(numberToWords(17, true)).toEqual('seventeenth');
-        expect(numberToWords(30, true)).toEqual('thirtieth');
-        expect(numberToWords(123, true)).toEqual('one hundred twenty-third');
+        expect(toWords(1, true)).toEqual('first');
+        expect(toWords(2, true)).toEqual('second');
+        expect(toWords(3, true)).toEqual('third');
+        expect(toWords(10, true)).toEqual('tenth');
+        expect(toWords(17, true)).toEqual('seventeenth');
+        expect(toWords(30, true)).toEqual('thirtieth');
+        expect(toWords(123, true)).toEqual('one hundred twenty-third');
     });
 });
 

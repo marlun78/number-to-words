@@ -1,8 +1,9 @@
 'use strict';
 
-module.exports = numberToWords;
+var makeOrdinal = require('./makeOrdinal');
+var isFinite = require('./isFinite');
 
-var numberWordsToOrdinal = require('./numberWordsToOrdinal');
+module.exports = toWords;
 
 var TEN = 10;
 var ONE_HUNDRED = 100;
@@ -14,31 +15,37 @@ var ONE_QUADRILLION = 1000000000000000; // 1.000.000.000.000.000 (15)
 var MAX = 9007199254740992;             // 9.007.199.254.740.992 (15)
 
 var LESS_THAN_TWENTY = [
-    'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine',
-    'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'
+    'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight',
+    'nine',
+    'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen',
+    'seventeen', 'eighteen', 'nineteen'
 ];
 
 var TENTHS_LESS_THAN_HUNDRED = [
-    'zero', 'ten', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'
+    'zero', 'ten', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy',
+    'eighty', 'ninety'
 ];
 
-if (typeof Number.isFinite !== 'function') {
-    Number.isFinite = function isFinite(value) {
-        return typeof value === 'number' && isFinite(value);
-    };
-}
-
-function numberToWords(number, asOrdinal) {
+/**
+ * Converts an integer into words.
+ * If number is decimal, the decimals will be removed.
+ * @example toWords(12) => 'twelve'
+ * @param {number} number
+ * @param {boolean} asOrdinal - Deprecated, use toWordsOrdinal() instead!
+ * @returns {string}
+ */
+function toWords(number, asOrdinal) {
     var words;
-    if (!Number.isFinite(number)) {
+    if (!isFinite(number)) {
         throw new TypeError('Not a finite number');
     }
-    words = toWords(number);
-    return asOrdinal ? numberWordsToOrdinal(words) : words;
+    words = generateWords(Math.floor(number));
+    return asOrdinal ? makeOrdinal(words) : words;
 }
 
-function toWords(number, words) {
-    var remainder, word;
+function generateWords(number) {
+    var remainder, word,
+        words = arguments[1];
 
     // We’re done
     if (number === 0) {
@@ -69,29 +76,30 @@ function toWords(number, words) {
 
     } else if (number < ONE_THOUSAND) {
         remainder = number % ONE_HUNDRED;
-        word = toWords(Math.floor(number / ONE_HUNDRED)) + ' hundred';
+        word = generateWords(Math.floor(number / ONE_HUNDRED)) + ' hundred';
 
     } else if (number < ONE_MILLION) {
         remainder = number % ONE_THOUSAND;
-        word = toWords(Math.floor(number / ONE_THOUSAND)) + ' thousand,';
+        word = generateWords(Math.floor(number / ONE_THOUSAND)) + ' thousand,';
 
     } else if (number < ONE_BILLION) {
         remainder = number % ONE_MILLION;
-        word = toWords(Math.floor(number / ONE_MILLION)) + ' million,';
+        word = generateWords(Math.floor(number / ONE_MILLION)) + ' million,';
 
     } else if (number < ONE_TRILLION) {
         remainder = number % ONE_BILLION;
-        word = toWords(Math.floor(number / ONE_BILLION)) + ' billion,';
+        word = generateWords(Math.floor(number / ONE_BILLION)) + ' billion,';
 
     } else if (number < ONE_QUADRILLION) {
         remainder = number % ONE_TRILLION;
-        word = toWords(Math.floor(number / ONE_TRILLION)) + ' trillion,';
+        word = generateWords(Math.floor(number / ONE_TRILLION)) + ' trillion,';
 
     } else if (number <= MAX) {
         remainder = number % ONE_QUADRILLION;
-        word = toWords(Math.floor(number / ONE_QUADRILLION)) + ' quadrillion,';
+        word = generateWords(Math.floor(number / ONE_QUADRILLION)) +
+        ' quadrillion,';
     }
 
     words.push(word);
-    return toWords(remainder, words);
+    return generateWords(remainder, words);
 }
