@@ -8,7 +8,7 @@ module.exports = toWordsOrdinal;
 /**
  * Converts a number into ordinal words.
  * @example toWordsOrdinal(12) => 'twelfth'
- * @param {number} number
+ * @param {number|string} number
  * @returns {string}
  */
 function toWordsOrdinal(number) {

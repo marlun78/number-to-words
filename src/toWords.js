@@ -15,31 +15,27 @@ var ONE_QUADRILLION = 1000000000000000; // 1.000.000.000.000.000 (15)
 var MAX = 9007199254740992;             // 9.007.199.254.740.992 (15)
 
 var LESS_THAN_TWENTY = [
-    'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight',
-    'nine',
-    'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen',
-    'seventeen', 'eighteen', 'nineteen'
+    'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten',
+    'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'
 ];
 
 var TENTHS_LESS_THAN_HUNDRED = [
-    'zero', 'ten', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy',
-    'eighty', 'ninety'
+    'zero', 'ten', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'
 ];
 
 /**
  * Converts an integer into words.
  * If number is decimal, the decimals will be removed.
  * @example toWords(12) => 'twelve'
- * @param {number} number
+ * @param {number|string} number
  * @param {boolean} asOrdinal - Deprecated, use toWordsOrdinal() instead!
  * @returns {string}
  */
 function toWords(number, asOrdinal) {
     var words;
-    if (!isFinite(number)) {
-        throw new TypeError('Not a finite number');
-    }
-    words = generateWords(Math.floor(number));
+    var num = parseInt(number, 10);
+    if (!isFinite(num)) throw new TypeError('Not a finite number: ' + number + '(' + typeof number + ')');
+    words = generateWords(num);
     return asOrdinal ? makeOrdinal(words) : words;
 }
 
