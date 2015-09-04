@@ -1,7 +1,5 @@
 'use strict';
 
-module.exports = isFinite_;
-
-function isFinite_(value) {
+module.exports = Number.isFinite || function (value) {
     return typeof value === 'number' && isFinite(value);
-}
+};
