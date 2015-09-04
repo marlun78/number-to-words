@@ -4,7 +4,7 @@
     "description": "Contains some util methods for converting numbers into words, ordinal words and ordinal numbers.",
     "main": "./src",
     "devDependencies": {
-        "jasmine": "^2.2.1"
+        "jasmine": "^2.3.2"
     },
     "scripts": {
         "test": "jasmine"
