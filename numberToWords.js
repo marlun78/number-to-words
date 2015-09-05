@@ -1,6 +1,6 @@
 /*!
  * Number-To-Words util
- * @version v1.2.0-beta.1
+ * @version v1.2.0-beta.2
  * @link https://github.com/marlun78/number-to-words
  * @author Martin Eneqvist (https://github.com/marlun78)
  * @license MIT
@@ -81,7 +81,7 @@ function replaceWithOrdinalVariant(match, numberWord) {
  */
 function toOrdinal(number) {
     var num = parseInt(number, 10);
-    if (!isFinite(num)) throw new TypeError('Not a finite number: ' + number + '(' + typeof number + ')');
+    if (!isFinite(num)) throw new TypeError('Not a finite number: ' + number + ' (' + typeof number + ')');
     var str = String(num);
     var lastChar = str.charAt(str.length - 1);
     return str + (lastChar === '1' ? 'st'
@@ -123,7 +123,7 @@ var TENTHS_LESS_THAN_HUNDRED = [
 function toWords(number, asOrdinal) {
     var words;
     var num = parseInt(number, 10);
-    if (!isFinite(num)) throw new TypeError('Not a finite number: ' + number + '(' + typeof number + ')');
+    if (!isFinite(num)) throw new TypeError('Not a finite number: ' + number + ' (' + typeof number + ')');
     words = generateWords(num);
     return asOrdinal ? makeOrdinal(words) : words;
 }
@@ -207,7 +207,6 @@ function toWordsOrdinal(number) {
 
 
     var numberToWords = {
-        _makeOrdinal: makeOrdinal, // Internal, for testability only!
         toOrdinal: toOrdinal,
         toWords: toWords,
         toWordsOrdinal: toWordsOrdinal
