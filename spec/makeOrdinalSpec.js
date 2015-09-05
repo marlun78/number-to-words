@@ -1,6 +1,6 @@
 'use strict';
 
-var makeOrdinal = require('../src/makeOrdinal');
+var makeOrdinal = typeof require !== 'undefined' ? require('../src/makeOrdinal') : window.numberToWords._makeOrdinal;
 
 describe('makeOrdinal', function () {
     var tests = [

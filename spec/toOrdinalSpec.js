@@ -1,6 +1,6 @@
 'use strict';
 
-var toOrdinal = require('../src/toOrdinal');
+var toOrdinal = typeof require !== 'undefined' ? require('../src/toOrdinal') : window.numberToWords.toOrdinal;
 
 describe('toOrdinal', function () {
     var tests = [

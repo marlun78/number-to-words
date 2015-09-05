@@ -1,6 +1,6 @@
 'use strict';
 
-var toWords = require('../src/toWords');
+var toWords = typeof require !== 'undefined' ? require('../src/toWords') : window.numberToWords.toWords;
 
 describe('toWords', function () {
     var tests = [
@@ -48,24 +48,51 @@ describe('toWords', function () {
         { input: 10000000, expect: 'ten million' },
         { input: 66666666, expect: 'sixty-six million, six hundred sixty-six thousand, six hundred sixty-six' },
         { input: 100000000, expect: 'one hundred million' },
-        { input: 777777777, expect: 'seven hundred seventy-seven million, seven hundred seventy-seven thousand, seven hundred seventy-seven' },
+        {
+            input: 777777777,
+            expect: 'seven hundred seventy-seven million, seven hundred seventy-seven thousand, seven hundred seventy-seven'
+        },
         { input: 1000000000, expect: 'one billion' },
-        { input: 8888888888, expect: 'eight billion, eight hundred eighty-eight million, eight hundred eighty-eight thousand, eight hundred eighty-eight' },
+        {
+            input: 8888888888,
+            expect: 'eight billion, eight hundred eighty-eight million, eight hundred eighty-eight thousand, eight hundred eighty-eight'
+        },
         { input: 10000000000, expect: 'ten billion' },
-        { input: 99999999999, expect: 'ninety-nine billion, nine hundred ninety-nine million, nine hundred ninety-nine thousand, nine hundred ninety-nine' },
+        {
+            input: 99999999999,
+            expect: 'ninety-nine billion, nine hundred ninety-nine million, nine hundred ninety-nine thousand, nine hundred ninety-nine'
+        },
         { input: 100000000000, expect: 'one hundred billion' },
-        { input: 111111111111, expect: 'one hundred eleven billion, one hundred eleven million, one hundred eleven thousand, one hundred eleven' },
+        {
+            input: 111111111111,
+            expect: 'one hundred eleven billion, one hundred eleven million, one hundred eleven thousand, one hundred eleven'
+        },
         { input: 1000000000000, expect: 'one trillion' },
-        { input: 2222222222222, expect: 'two trillion, two hundred twenty-two billion, two hundred twenty-two million, two hundred twenty-two thousand, two hundred twenty-two' },
+        {
+            input: 2222222222222,
+            expect: 'two trillion, two hundred twenty-two billion, two hundred twenty-two million, two hundred twenty-two thousand, two hundred twenty-two'
+        },
         { input: 10000000000000, expect: 'ten trillion' },
-        { input: 33333333333333, expect: 'thirty-three trillion, three hundred thirty-three billion, three hundred thirty-three million, three hundred thirty-three thousand, three hundred thirty-three' },
+        {
+            input: 33333333333333,
+            expect: 'thirty-three trillion, three hundred thirty-three billion, three hundred thirty-three million, three hundred thirty-three thousand, three hundred thirty-three'
+        },
         { input: 100000000000000, expect: 'one hundred trillion' },
-        { input: 444444444444444, expect: 'four hundred forty-four trillion, four hundred forty-four billion, four hundred forty-four million, four hundred forty-four thousand, four hundred forty-four' },
+        {
+            input: 444444444444444,
+            expect: 'four hundred forty-four trillion, four hundred forty-four billion, four hundred forty-four million, four hundred forty-four thousand, four hundred forty-four'
+        },
         { input: 1000000000000000, expect: 'one quadrillion' },
-        { input: 5555555555555555, expect: 'five quadrillion, five hundred fifty-five trillion, five hundred fifty-five billion, five hundred fifty-five million, five hundred fifty-five thousand, five hundred fifty-five' },
-        { input: 9007199254740992, expect: 'nine quadrillion, seven trillion, one hundred ninety-nine billion, two hundred fifty-four million, seven hundred forty thousand, nine hundred ninety-two' }
+        {
+            input: 5555555555555555,
+            expect: 'five quadrillion, five hundred fifty-five trillion, five hundred fifty-five billion, five hundred fifty-five million, five hundred fifty-five thousand, five hundred fifty-five'
+        },
+        {
+            input: 9007199254740992,
+            expect: 'nine quadrillion, seven trillion, one hundred ninety-nine billion, two hundred fifty-four million, seven hundred forty thousand, nine hundred ninety-two'
+        }
     ];
-    
+
     function addTest(test) {
         it('should, if passed ' + formatNumber(test.input) + ', return ' + test.expect, function () {
             expect(toWords(test.input)).toEqual(test.expect);
