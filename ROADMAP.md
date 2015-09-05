@@ -1,8 +1,9 @@
 # Number To Words — Roadmap
 
 ### Version 2.0
-- Rewrite to support multiple languages
-- Remove deprecated `toWords` second optional `asOrdinal` parameter
+- Rework the API  
+- Add pluggable languages files for multi-language support  
+- Remove 1.x deprecated code
 
 ### Version 1.2
 ✔ Make a single package for browsers  
@@ -12,7 +13,7 @@
 ---
 
 ### Version 1.1
-- Add methods for `toOrdinal` and `toWordsOrdinal`
+✔ Add methods for `toOrdinal` and `toWordsOrdinal`
 
 ### Version 1.0
-- Basic functionality
+✔ Basic functionality
