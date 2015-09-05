@@ -1,6 +1,6 @@
 {
     "name": "number-to-words",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "description": "Contains some util methods for converting numbers into words, ordinal words and ordinal numbers.",
     "main": "./src",
     "browser": "./numberToWords.min.js",

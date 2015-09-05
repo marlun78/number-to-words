@@ -1,13 +1,12 @@
 {
     "name": "number-to-words",
-    "version": "1.2.0",
-    "description": "Contains some util methods for converting numbers into words, ordinal words and ordinal numbers.",
-    "main": "./numberToWords.min.js",
+    "version": "1.2.1",
     "homepage": "https://github.com/marlun78/number-to-words",
     "authors": [
         "Martin Eneqvist (https://github.com/marlun78)"
     ],
-    "license": "MIT",
+    "description": "Contains some util methods for converting numbers into words, ordinal words and ordinal numbers.",
+    "main": "./numberToWords.min.js",
     "moduleType": [
         "globals",
         "node"
@@ -16,16 +15,6 @@
         "type": "git",
         "url": "https://github.com/marlun78/number-to-words"
     },
-    "ignore": [
-        "**/*",
-        "bower_components",
-        "node_modules",
-        "spec",
-        "src",
-        "gulpfile.js",
-        "wrapBundle.tmpl",
-        "wrapEach.tmpl"
-    ],
     "keywords": [
         "converter",
         "number",
@@ -33,5 +22,14 @@
         "string",
         "tool",
         "word"
+    ],
+    "license": "MIT",
+    "ignore": [
+        "bower_components",
+        "node_modules",
+        "spec",
+        "gulpfile.js",
+        "wrapBundle.tmpl",
+        "wrapEach.tmpl"
     ]
 }
