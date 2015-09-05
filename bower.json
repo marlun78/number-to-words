@@ -17,6 +17,7 @@
         "url": "https://github.com/marlun78/number-to-words"
     },
     "ignore": [
+        "**/*",
         "bower_components",
         "node_modules",
         "spec",
