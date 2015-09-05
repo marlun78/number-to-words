@@ -1,6 +1,6 @@
 /*!
  * Number-To-Words util
- * @version v1.2.0-beta.2
+ * @version v1.2.1
  * @link https://github.com/marlun78/number-to-words
  * @author Martin Eneqvist (https://github.com/marlun78)
  * @license MIT
@@ -117,15 +117,12 @@ var TENTHS_LESS_THAN_HUNDRED = [
  * If number is decimal, the decimals will be removed.
  * @example toWords(12) => 'twelve'
  * @param {number|string} number
- * @param {boolean} [asOrdinal] - Deprecated, use toWordsOrdinal() instead!
  * @returns {string}
  */
-function toWords(number, asOrdinal) {
-    var words;
+function toWords(number) {
     var num = parseInt(number, 10);
     if (!isFinite(num)) throw new TypeError('Not a finite number: ' + number + ' (' + typeof number + ')');
-    words = generateWords(num);
-    return asOrdinal ? makeOrdinal(words) : words;
+    return generateWords(num);
 }
 
 function generateWords(number) {

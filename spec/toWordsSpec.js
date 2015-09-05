@@ -101,15 +101,13 @@ describe('toWords', function () {
 
     tests.forEach(addTest);
 
-    // Note! This is deprecated, use toWordsOrdinal() instead!
-    it('should return the number with an ordinal word if passed a second truthy argument', function () {
-        expect(toWords(1, true)).toEqual('first');
-        expect(toWords(2, true)).toEqual('second');
-        expect(toWords(3, true)).toEqual('third');
-        expect(toWords(10, true)).toEqual('tenth');
-        expect(toWords(17, true)).toEqual('seventeenth');
-        expect(toWords(30, true)).toEqual('thirtieth');
-        expect(toWords(123, true)).toEqual('one hundred twenty-third');
+    // Testing deprecated feature. Use toWordsOrdinal() instead!
+    it('should no longer return the number with an ordinal word if passed a second truthy argument', function () {
+        expect(toWords(3, true)).toEqual('three');
+        expect(toWords(10, true)).toEqual('ten');
+        expect(toWords(17, true)).toEqual('seventeen');
+        expect(toWords(30, true)).toEqual('thirty');
+        expect(toWords(123, true)).toEqual('one hundred twenty-three');
     });
 });
 
