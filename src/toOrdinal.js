@@ -11,7 +11,7 @@ var isFinite = require('./isFinite');
  */
 function toOrdinal(number) {
     var num = parseInt(number, 10);
-    if (!isFinite(num)) throw new TypeError('Not a finite number: ' + number + '(' + typeof number + ')');
+    if (!isFinite(num)) throw new TypeError('Not a finite number: ' + number + ' (' + typeof number + ')');
     var str = String(num);
     var lastChar = str.charAt(str.length - 1);
     return str + (lastChar === '1' ? 'st'
