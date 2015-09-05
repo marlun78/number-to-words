@@ -8,8 +8,7 @@
     "description": "Contains some util methods for converting numbers into words, ordinal words and ordinal numbers.",
     "main": "./numberToWords.min.js",
     "moduleType": [
-        "globals",
-        "node"
+        "globals"
     ],
     "repository": {
         "type": "git",
@@ -28,7 +27,10 @@
         "bower_components",
         "node_modules",
         "spec",
+        "src",
+        ".gitignore",
         "gulpfile.js",
+        "package.json",
         "wrapBundle.tmpl",
         "wrapEach.tmpl"
     ]
