@@ -5,9 +5,9 @@
 - Remove deprecated `toWords` second optional `asOrdinal` parameter
 
 ### Version 1.2
-- Make a single package for browsers
-- Make unit tests runnable in browser
-- Allow for string values (replacing `Math.floor` with `parseInt`)
+✔ Make a single package for browsers  
+- Make unit tests runnable in browser  
+✔ Allow for string values (replacing `Math.floor` with `parseInt`)
 
 ---
 

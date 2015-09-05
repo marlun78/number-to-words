@@ -2,8 +2,6 @@
 
 var isFinite = require('./isFinite');
 
-module.exports = toOrdinal;
-
 /**
  * Converts an integer into a string with an ordinal postfix.
  * If number is decimal, the decimals will be removed.
@@ -21,3 +19,5 @@ function toOrdinal(number) {
             : lastChar === '3' ? 'rd'
             : 'th');
 }
+
+module.exports = toOrdinal;

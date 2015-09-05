@@ -56,7 +56,7 @@ Comments and bug reports are much appreciated. Please enter them on the [issues 
 
 ##### 1.1.0
 - New methods `toOrdinal` and `toWordsOrdinal`
-- Deprecated `toWords` second optional `asOrdinal` parameter
+- Deprecated `toWords` second optional `asOrdinal` parameter, use `toWordsOrdinal()`-method instead
 - `toWords` now converts any decimal input to an integer (with `Math.floor`)
 - Bug fixed returning _“zeroth”_ instead of _“zero”_ when converting a number word into its ordinal
 

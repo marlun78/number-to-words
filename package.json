@@ -1,19 +1,26 @@
 {
     "name": "number-to-words",
-    "version": "1.2.0-beta.0",
+    "version": "1.2.0-beta.1",
     "description": "Contains some util methods for converting numbers into words, ordinal words and ordinal numbers.",
     "main": "./src",
     "devDependencies": {
+        "gulp": "^3.9.0",
+        "gulp-concat": "^2.6.0",
+        "gulp-rename": "^1.2.2",
+        "gulp-replace": "^0.5.4",
+        "gulp-uglify": "^1.4.0",
+        "gulp-wrap": "^0.11.0",
         "jasmine": "^2.3.2"
     },
     "scripts": {
+        "build": "gulp build",
         "test": "jasmine"
     },
     "repository": {
         "type": "git",
         "url": "https://github.com/marlun78/number-to-words"
     },
-    "author": "Martin Eneqvist <marlun78@hotmail.com> (https://github.com/marlun78)",
+    "author": "Martin Eneqvist (https://github.com/marlun78)",
     "license": "MIT",
     "bugs": {
         "url": "https://github.com/marlun78/number-to-words/issues"

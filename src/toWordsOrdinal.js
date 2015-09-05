@@ -3,8 +3,6 @@
 var makeOrdinal = require('./makeOrdinal');
 var toWords = require('./toWords');
 
-module.exports = toWordsOrdinal;
-
 /**
  * Converts a number into ordinal words.
  * @example toWordsOrdinal(12) => 'twelfth'
@@ -15,3 +13,5 @@ function toWordsOrdinal(number) {
     var words = toWords(number);
     return makeOrdinal(words);
 }
+
+module.exports = toWordsOrdinal;

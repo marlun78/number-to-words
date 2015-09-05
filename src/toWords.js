@@ -3,8 +3,6 @@
 var makeOrdinal = require('./makeOrdinal');
 var isFinite = require('./isFinite');
 
-module.exports = toWords;
-
 var TEN = 10;
 var ONE_HUNDRED = 100;
 var ONE_THOUSAND = 1000;
@@ -28,7 +26,7 @@ var TENTHS_LESS_THAN_HUNDRED = [
  * If number is decimal, the decimals will be removed.
  * @example toWords(12) => 'twelve'
  * @param {number|string} number
- * @param {boolean} asOrdinal - Deprecated, use toWordsOrdinal() instead!
+ * @param {boolean} [asOrdinal] - Deprecated, use toWordsOrdinal() instead!
  * @returns {string}
  */
 function toWords(number, asOrdinal) {
@@ -99,3 +97,5 @@ function generateWords(number) {
     words.push(word);
     return generateWords(remainder, words);
 }
+
+module.exports = toWords;
