@@ -48,11 +48,21 @@ converter.toWordsOrdinal(21); // => “twenty-first”
 ```
 
 
-### Comments / Bugs
-Comments and bug reports are much appreciated. Please enter them on the [issues page](https://github.com/marlun78/number-to-words/issues). Thanks!
+### Contributions, Comments and Bugs 
+Contributions, comments and/or bug reports are much appreciated. Open a pull request or add comments on the 
+[issues page](https://github.com/marlun78/number-to-words/issues). Thanks!
+
+
+### Upcoming v2.0 
+See [roadmap](ROADMAP.md) for details.
 
 
 ### Change Log
+
+##### Version 1.2.0 (final 1.x release)
+- Bundles are now available for browsers (`./numberToWords.js` and `./numberToWords.min.js`). They export a global `numberToWords` variable.
+- Made unit tests runnable in browser. To run the unit tests in the browser, start a local server and visit localhost/spec with a browser.
+- `toOrdinal`, `toWords` and `toWordsOrdinal` now also allow string values as input (replaced `Math.floor` with `parseInt`).
 
 ##### 1.1.0
 - New methods `toOrdinal` and `toWordsOrdinal`
