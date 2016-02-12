@@ -16,7 +16,11 @@ describe('toOrdinal', function () {
         { input: 7, expect: '7th' },
         { input: 8, expect: '8th' },
         { input: 9, expect: '9th' },
-        { input: 10, expect: '10th' }
+        { input: 10, expect: '10th' },
+        { input: 11, expect: '11th' },
+        { input: 12, expect: '12th' },
+        { input: 13, expect: '13th' },
+        { input: 121, expect: '121st' }
     ];
 
     function addTest(test) {
