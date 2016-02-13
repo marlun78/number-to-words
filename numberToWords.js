@@ -1,8 +1,9 @@
 /*!
  * Number-To-Words util
- * @version v1.2.1
+ * @version v1.2.2
  * @link https://github.com/marlun78/number-to-words
  * @author Martin Eneqvist (https://github.com/marlun78)
+ * @contributors Aleksey Pilyugin (https://github.com/pilyugin)
  * @license MIT
  */
 (function () {

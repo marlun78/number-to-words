@@ -48,18 +48,21 @@ converter.toWordsOrdinal(21); // => “twenty-first”
 ```
 
 
-### Contributions, Comments and Bugs 
-Contributions, comments and/or bug reports are much appreciated. Open a pull request or add comments on the 
+### Contributions, Comments and Bugs
+Contributions, comments and/or bug reports are much appreciated. Open a pull request or add comments on the
 [issues page](https://github.com/marlun78/number-to-words/issues). Thanks!
 
 
-### Upcoming v2.0 
+### Upcoming v2.0
 See [roadmap](ROADMAP.md) for details.
 
 
 ### Change Log
 
-##### Version 1.2.1 (final 1.x release)
+##### Version 1.2.2 (final 1.x release)
+- Bug fix in `toOrdinal`. Input 11, 12, and 13 now yelds the correct suffix. Thanks to @pilyugin.
+
+##### Version 1.2.1
 - Bower package
 
 ##### Version 1.2.0
