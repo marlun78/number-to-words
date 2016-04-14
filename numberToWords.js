@@ -1,6 +1,6 @@
 /*!
  * Number-To-Words util
- * @version v1.2.2
+ * @version v1.2.3
  * @link https://github.com/marlun78/number-to-words
  * @author Martin Eneqvist (https://github.com/marlun78)
  * @contributors Aleksey Pilyugin (https://github.com/pilyugin)
@@ -15,7 +15,9 @@
 
     // ========== file: /src/isFinite.js ==========
 
-var globalIsFinite = isFinite;
+var globalIsFinite = isFinite || function(value) {
+  return value < Infinity && value > -Infinity;
+};
 var isFinite = Number.isFinite || function (value) {
     return typeof value === 'number' && globalIsFinite(value);
 };
