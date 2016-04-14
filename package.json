@@ -1,7 +1,7 @@
 {
     "name": "number-to-words",
     "description": "Contains some util methods for converting numbers into words, ordinal words and ordinal numbers.",
-    "version": "1.2.2",
+    "version": "1.2.3",
     "main": "./src",
     "browser": "./numberToWords.min.js",
     "author": "Martin Eneqvist (https://github.com/marlun78)",
