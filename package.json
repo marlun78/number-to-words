@@ -1,12 +1,13 @@
 {
     "name": "number-to-words",
     "description": "Contains some util methods for converting numbers into words, ordinal words and ordinal numbers.",
-    "version": "1.2.2",
+    "version": "1.2.3",
     "main": "./src",
     "browser": "./numberToWords.min.js",
     "author": "Martin Eneqvist (https://github.com/marlun78)",
     "contributors": [
-        "Aleksey Pilyugin (https://github.com/pilyugin)"
+        "Aleksey Pilyugin (https://github.com/pilyugin)",
+        "Jeremiah Hall (https://github.com/jeremiahrhall)"
     ],
     "devDependencies": {
         "gulp": "^3.9.0",
@@ -14,12 +15,18 @@
         "gulp-rename": "^1.2.2",
         "gulp-replace": "^0.5.4",
         "gulp-uglify": "^1.4.0",
+        "gulp-util": "^3.0.7",
         "gulp-wrap": "^0.11.0",
-        "jasmine": "^2.3.2"
+        "http-server": "^0.9.0",
+        "jasmine": "^2.3.2",
+        "phantomjs-prebuilt": "^2.1.7"
     },
     "scripts": {
         "build": "gulp build",
-        "test": "jasmine"
+        "test": "npm run test:node",
+        "test:node": "jasmine",
+        "test:phantom": "node_modules/phantomjs-prebuilt/bin/phantomjs node_modules/phantomjs-prebuilt/lib/phantom/examples/run-jasmine2.js 'http://localhost:3456/spec/'",
+        "test:server": "http-server ./ -p 3456"
     },
     "repository": {
         "type": "git",

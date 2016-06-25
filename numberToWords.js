@@ -1,9 +1,9 @@
 /*!
  * Number-To-Words util
- * @version v1.2.2
+ * @version v1.2.3
  * @link https://github.com/marlun78/number-to-words
  * @author Martin Eneqvist (https://github.com/marlun78)
- * @contributors Aleksey Pilyugin (https://github.com/pilyugin)
+ * @contributors Aleksey Pilyugin (https://github.com/pilyugin),Jeremiah Hall (https://github.com/jeremiahrhall)
  * @license MIT
  */
 (function () {
@@ -15,10 +15,10 @@
 
     // ========== file: /src/isFinite.js ==========
 
-var globalIsFinite = isFinite;
-var isFinite = Number.isFinite || function (value) {
-    return typeof value === 'number' && globalIsFinite(value);
-};
+// Simplified https://gist.github.com/marlun78/885eb0021e980c6ce0fb
+function isFinite(value) {
+    return !(typeof value !== 'number' || value !== value || value === Infinity || value === -Infinity);
+}
 
 
 // ========== file: /src/makeOrdinal.js ==========

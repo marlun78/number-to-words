@@ -59,7 +59,10 @@ See [roadmap](ROADMAP.md) for details.
 
 ### Change Log
 
-##### Version 1.2.2 (final 1.x release)
+##### Version 1.2.3 (final 1.x release)
+- Bug fix in `isFinite` for Phantom and IE. Thanks to @jeremiahrhall.
+
+##### Version 1.2.2
 - Bug fix in `toOrdinal`. Input 11, 12, and 13 now yelds the correct suffix. Thanks to @pilyugin.
 
 ##### Version 1.2.1
