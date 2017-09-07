@@ -32,7 +32,12 @@ var TENTHS_LESS_THAN_HUNDRED = [
 function toWords(number, asOrdinal) {
     var words;
     var num = parseInt(number, 10);
-    if (!isFinite(num)) throw new TypeError('Not a finite number: ' + number + ' (' + typeof number + ')');
+    if (!isFinite(num)) {
+        throw new TypeError('Not a finite number: ' + number + ' (' + typeof number + ')');
+    }
+    if (num > MAX) {
+        throw new Error('The number is greater than the MAX size');
+    }
     words = generateWords(num);
     return asOrdinal ? makeOrdinal(words) : words;
 }
