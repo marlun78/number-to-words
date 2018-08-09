@@ -13,23 +13,21 @@ var log = require('fancy-log');
 
 var pkg = require('./package.json');
 
-var USE_STRICT_PATTERN = /(['"]use strict['"];?\n?)/g;
-var REQUIRE_PATTERN = /((?:var |,)[^=]+=\s*require\([^\)]+\);?\n?)/g;
-var EXPORT_PATTERN = /((?:module\.)?exports\s*=\s*[^,;]+;?\n?)/g;
+function bundleTask() {
+    var USE_STRICT_PATTERN = /(['"]use strict['"];?\n?)/g;
+    var REQUIRE_PATTERN = /((?:var |,)[^=]+=\s*require\([^\)]+\);?\n?)/g;
+    var EXPORT_PATTERN = /((?:module\.)?exports\s*=\s*[^,;]+;?\n?)/g;
 
-var files = [
-    './src/maxSafeInteger.js',
-    './src/isFinite.js',
-    './src/isSafeNumber.js',
-    './src/makeOrdinal.js',
-    './src/toOrdinal.js',
-    './src/toWords.js',
-    './src/toWordsOrdinal.js'
-];
+    var files = [
+        './src/maxSafeInteger.js',
+        './src/isFinite.js',
+        './src/isSafeNumber.js',
+        './src/makeOrdinal.js',
+        './src/toOrdinal.js',
+        './src/toWords.js',
+        './src/toWordsOrdinal.js'
+    ];
 
-gulp.task('default', ['build']);
-gulp.task('build', ['bundle']);
-gulp.task('bundle', function () {
     return gulp.src(files)
         .on('error', log.error)
         .pipe(gulpPlugins.wrap({ src: 'wrapEach.tmpl' }))
@@ -43,4 +41,8 @@ gulp.task('bundle', function () {
         .pipe(gulpPlugins.uglify())
         .pipe(gulpPlugins.rename('numberToWords.min.js'))
         .pipe(gulp.dest('./'));
-});
+}
+
+module.exports = {
+    build: gulp.parallel(bundleTask)
+};
