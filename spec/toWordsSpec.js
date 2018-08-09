@@ -1,5 +1,6 @@
 'use strict';
 
+var MAX_SAFE_INTEGER = 9007199254740991;
 var toWords = typeof require !== 'undefined' ? require('../src/toWords') : window.numberToWords.toWords;
 
 describe('toWords', function () {
@@ -88,8 +89,8 @@ describe('toWords', function () {
             expect: 'five quadrillion, five hundred fifty-five trillion, five hundred fifty-five billion, five hundred fifty-five million, five hundred fifty-five thousand, five hundred fifty-five'
         },
         {
-            input: 9007199254740992,
-            expect: 'nine quadrillion, seven trillion, one hundred ninety-nine billion, two hundred fifty-four million, seven hundred forty thousand, nine hundred ninety-two'
+            input: MAX_SAFE_INTEGER,
+            expect: 'nine quadrillion, seven trillion, one hundred ninety-nine billion, two hundred fifty-four million, seven hundred forty thousand, nine hundred ninety-one'
         }
     ];
 
@@ -110,6 +111,18 @@ describe('toWords', function () {
         expect(toWords(17, true)).toEqual('seventeenth');
         expect(toWords(30, true)).toEqual('thirtieth');
         expect(toWords(123, true)).toEqual('one hundred twenty-third');
+    });
+    
+    it('should throw a RangeError if input is greater or lesser than MAX_SAFE_INTEGER', function() {
+        var unsafe = MAX_SAFE_INTEGER + 100;
+
+        expect(function() {
+            toWords(unsafe);
+        }).toThrowError(/Input is not a safe number/);
+
+        expect(function() {
+            toWords(-unsafe);
+        }).toThrowError(/Input is not a safe number/);
     });
 });
 

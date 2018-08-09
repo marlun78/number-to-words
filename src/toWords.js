@@ -2,6 +2,7 @@
 
 var makeOrdinal = require('./makeOrdinal');
 var isFinite = require('./isFinite');
+var isSafeNumber = require('./isSafeNumber');
 
 var TEN = 10;
 var ONE_HUNDRED = 100;
@@ -32,7 +33,17 @@ var TENTHS_LESS_THAN_HUNDRED = [
 function toWords(number, asOrdinal) {
     var words;
     var num = parseInt(number, 10);
-    if (!isFinite(num)) throw new TypeError('Not a finite number: ' + number + ' (' + typeof number + ')');
+
+    if (!isFinite(num)) {
+        throw new TypeError(
+            'Not a finite number: ' + number + ' (' + typeof number + ')'
+        );
+    }
+    if (!isSafeNumber(num)) {
+        throw new RangeError(
+            'Input is not a safe number, it’s either too large or too small.'
+        );
+    }
     words = generateWords(num);
     return asOrdinal ? makeOrdinal(words) : words;
 }

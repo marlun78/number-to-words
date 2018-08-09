@@ -17,7 +17,9 @@ var REQUIRE_PATTERN = /((?:var |,)[^=]+=\s*require\([^\)]+\);?\n?)/g;
 var EXPORT_PATTERN = /((?:module\.)?exports\s*=\s*[^,;]+;?\n?)/g;
 
 var files = [
+    './src/maxSafeInteger.js',
     './src/isFinite.js',
+    './src/isSafeNumber.js',
     './src/makeOrdinal.js',
     './src/toOrdinal.js',
     './src/toWords.js',
