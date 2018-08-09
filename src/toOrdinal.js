@@ -13,7 +13,7 @@ function toOrdinal(number) {
     var num = parseInt(number, 10);
     if (!isFinite(num)) throw new TypeError('Not a finite number: ' + number + ' (' + typeof number + ')');
     var str = String(num);
-    var lastTwoDigits = num % 100;
+    var lastTwoDigits = Math.abs(num % 100);
     var betweenElevenAndThirteen = lastTwoDigits >= 11 && lastTwoDigits <= 13;
     var lastChar = str.charAt(str.length - 1);
     return str + (betweenElevenAndThirteen ? 'th'

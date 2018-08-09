@@ -4,6 +4,12 @@ var toOrdinal = typeof require !== 'undefined' ? require('../src/toOrdinal') : w
 
 describe('toOrdinal', function () {
     var tests = [
+        { input: -121, expect: '-121st' },
+        { input: -13, expect: '-13th' },
+        { input: -12, expect: '-12th' },
+        { input: -11, expect: '-11th' },
+        { input: -3, expect: '-3rd' },
+        { input: -2, expect: '-2nd' },
         { input: -1, expect: '-1st' },
         { input: 0, expect: '0th' },
         { input: 1, expect: '1st' },
