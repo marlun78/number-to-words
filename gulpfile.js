@@ -10,6 +10,7 @@ var gulpPlugins = {
     wrap: require('gulp-wrap')
 };
 var log = require('fancy-log');
+var license = require('uglify-save-license');
 
 var pkg = require('./package.json');
 
@@ -38,7 +39,7 @@ function bundleTask() {
         .pipe(gulpPlugins.wrap({ src: 'wrapBundle.tmpl' }, pkg, { variable: 'data' }))
         .pipe(gulp.dest('./'))
         // Minified version
-        .pipe(gulpPlugins.uglify())
+        .pipe(gulpPlugins.uglify({ output: { comments: license } }))
         .pipe(gulpPlugins.rename('numberToWords.min.js'))
         .pipe(gulp.dest('./'));
 }
