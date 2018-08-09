@@ -10,6 +10,7 @@
         "Jeremiah Hall (https://github.com/jeremiahrhall)"
     ],
     "devDependencies": {
+        "eslint": "5.3.0",
         "gulp": "^3.9.0",
         "gulp-concat": "^2.6.0",
         "gulp-rename": "^1.2.2",
@@ -23,7 +24,8 @@
     },
     "scripts": {
         "build": "gulp build",
-        "test": "npm run test:node",
+        "lint": "node node_modules/eslint/bin/eslint.js .",
+        "test": "npm run lint && npm run test:node",
         "test:node": "jasmine",
         "test:phantom": "node_modules/phantomjs-prebuilt/bin/phantomjs node_modules/phantomjs-prebuilt/lib/phantom/examples/run-jasmine2.js 'http://localhost:3456/spec/'",
         "test:server": "http-server ./ -p 3456"
