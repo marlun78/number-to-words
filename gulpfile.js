@@ -2,7 +2,6 @@
 
 var fs = require('fs');
 var gulp = require('gulp');
-var gutil = require('gulp-util');
 var gulpPlugins = {
     concat: require('gulp-concat'),
     rename: require('gulp-rename'),
@@ -10,6 +9,8 @@ var gulpPlugins = {
     uglify: require('gulp-uglify'),
     wrap: require('gulp-wrap')
 };
+var log = require('fancy-log');
+
 var pkg = require('./package.json');
 
 var USE_STRICT_PATTERN = /(['"]use strict['"];?\n?)/g;
@@ -17,7 +18,9 @@ var REQUIRE_PATTERN = /((?:var |,)[^=]+=\s*require\([^\)]+\);?\n?)/g;
 var EXPORT_PATTERN = /((?:module\.)?exports\s*=\s*[^,;]+;?\n?)/g;
 
 var files = [
+    './src/maxSafeInteger.js',
     './src/isFinite.js',
+    './src/isSafeNumber.js',
     './src/makeOrdinal.js',
     './src/toOrdinal.js',
     './src/toWords.js',
@@ -28,7 +31,7 @@ gulp.task('default', ['build']);
 gulp.task('build', ['bundle']);
 gulp.task('bundle', function () {
     return gulp.src(files)
-        .on('error', gutil.log)
+        .on('error', log.error)
         .pipe(gulpPlugins.wrap({ src: 'wrapEach.tmpl' }))
         .pipe(gulpPlugins.replace(USE_STRICT_PATTERN, ''))
         .pipe(gulpPlugins.replace(REQUIRE_PATTERN, ''))

@@ -1,6 +1,6 @@
 /*!
  * Number-To-Words util
- * @version v1.2.3
+ * @version v1.2.4
  * @link https://github.com/marlun78/number-to-words
  * @author Martin Eneqvist (https://github.com/marlun78)
  * @contributors Aleksey Pilyugin (https://github.com/pilyugin),Jeremiah Hall (https://github.com/jeremiahrhall)
@@ -13,11 +13,24 @@
         typeof global == 'object' && global.global === global && global ||
         this;
 
-    // ========== file: /src/isFinite.js ==========
+    // ========== file: /src/maxSafeInteger.js ==========
+
+var MAX_SAFE_INTEGER = 9007199254740991;
+
+
+// ========== file: /src/isFinite.js ==========
 
 // Simplified https://gist.github.com/marlun78/885eb0021e980c6ce0fb
 function isFinite(value) {
     return !(typeof value !== 'number' || value !== value || value === Infinity || value === -Infinity);
+}
+
+
+// ========== file: /src/isSafeNumber.js ==========
+
+
+function isSafeNumber(value) {
+    return typeof value === 'number' && Math.abs(value) <= MAX_SAFE_INTEGER;
 }
 
 
@@ -82,9 +95,19 @@ function replaceWithOrdinalVariant(match, numberWord) {
  */
 function toOrdinal(number) {
     var num = parseInt(number, 10);
-    if (!isFinite(num)) throw new TypeError('Not a finite number: ' + number + ' (' + typeof number + ')');
+
+    if (!isFinite(num)) {
+        throw new TypeError(
+            'Not a finite number: ' + number + ' (' + typeof number + ')'
+        );
+    }
+    if (!isSafeNumber(num)) {
+        throw new RangeError(
+            'Input is not a safe number, it’s either too large or too small.'
+        );
+    }
     var str = String(num);
-    var lastTwoDigits = num % 100;
+    var lastTwoDigits = Math.abs(num % 100);
     var betweenElevenAndThirteen = lastTwoDigits >= 11 && lastTwoDigits <= 13;
     var lastChar = str.charAt(str.length - 1);
     return str + (betweenElevenAndThirteen ? 'th'
@@ -127,7 +150,17 @@ var TENTHS_LESS_THAN_HUNDRED = [
 function toWords(number, asOrdinal) {
     var words;
     var num = parseInt(number, 10);
-    if (!isFinite(num)) throw new TypeError('Not a finite number: ' + number + ' (' + typeof number + ')');
+
+    if (!isFinite(num)) {
+        throw new TypeError(
+            'Not a finite number: ' + number + ' (' + typeof number + ')'
+        );
+    }
+    if (!isSafeNumber(num)) {
+        throw new RangeError(
+            'Input is not a safe number, it’s either too large or too small.'
+        );
+    }
     words = generateWords(num);
     return asOrdinal ? makeOrdinal(words) : words;
 }
