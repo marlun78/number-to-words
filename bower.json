@@ -1,14 +1,16 @@
 {
     "name": "number-to-words",
     "description": "Contains some util methods for converting numbers into words, ordinal words and ordinal numbers.",
-    "version": "1.2.3",
+    "version": "1.2.4",
     "main": "./numberToWords.min.js",
     "authors": [
         "Martin Eneqvist (https://github.com/marlun78)"
     ],
     "contributors": [
         "Aleksey Pilyugin (https://github.com/pilyugin)",
-        "Jeremiah Hall (https://github.com/jeremiahrhall)"
+        "Jeremiah Hall (https://github.com/jeremiahrhall)",
+        "Adriano Melo (https://github.com/adrianomelo)",
+        "dmrzn (https://github.com/dmrzn)"
     ],
     "homepage": "https://github.com/marlun78/number-to-words",
     "moduleType": [
@@ -32,6 +34,10 @@
         "bower_components",
         "node_modules",
         "spec",
+        ".editorconfig",
+        ".eslint",
+        ".npmrc",
+        ".prettierrc",
         "gulpfile.js",
         "wrapBundle.tmpl",
         "wrapEach.tmpl"
