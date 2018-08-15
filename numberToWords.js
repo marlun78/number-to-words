@@ -198,7 +198,11 @@ function generateWords(number) {
 
     } else if (number < ONE_THOUSAND) {
         remainder = number % ONE_HUNDRED;
-        word = generateWords(Math.floor(number / ONE_HUNDRED)) + ' hundred';
+        var phrase = ' hundred';
+        if(remainder > 0){
+            phrase = ' hundred and';
+        }
+        word = generateWords(Math.floor(number / ONE_HUNDRED)) + phrase;
 
     } else if (number < ONE_MILLION) {
         remainder = number % ONE_THOUSAND;
