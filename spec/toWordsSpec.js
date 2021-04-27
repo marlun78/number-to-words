@@ -5,10 +5,13 @@ var toWords = typeof require !== 'undefined' ? require('../src/toWords') : windo
 
 describe('toWords', function () {
     var tests = [
+        { input: -1.5, expect: 'minus one and five tenths' },
         { input: -1, expect: 'minus one' },
         { input: 0, expect: 'zero' },
+        { input: 0.9, expect: 'zero and nine tenths' },
         { input: 1, expect: 'one' },
-        { input: 1.9, expect: 'one' },
+        { input: 1.9, expect: 'one and nine tenths' },
+        { input: 1.99, expect: 'one and ninety-nine hundredths' },
         { input: 2, expect: 'two' },
         { input: 3, expect: 'three' },
         { input: 4, expect: 'four' },
@@ -18,6 +21,7 @@ describe('toWords', function () {
         { input: 8, expect: 'eight' },
         { input: 9, expect: 'nine' },
         { input: 10, expect: 'ten' },
+        { input: 10.5, expect: 'ten and five tenths' },
         { input: 11, expect: 'eleven' },
         { input: 12, expect: 'twelve' },
         { input: 13, expect: 'thirteen' },
@@ -91,6 +95,10 @@ describe('toWords', function () {
         {
             input: MAX_SAFE_INTEGER,
             expect: 'nine quadrillion, seven trillion, one hundred ninety-nine billion, two hundred fifty-four million, seven hundred forty thousand, nine hundred ninety-one'
+        },
+        {
+            input: 1.1,
+            expect: 'one and one tenth'
         }
     ];
 
@@ -106,24 +114,26 @@ describe('toWords', function () {
     it('should return the number with an ordinal word if passed a second truthy argument', function () {
         expect(toWords(1, true)).toEqual('first');
         expect(toWords(2, true)).toEqual('second');
+        expect(toWords(2.1, true)).toEqual('second');
         expect(toWords(3, true)).toEqual('third');
         expect(toWords(10, true)).toEqual('tenth');
         expect(toWords(17, true)).toEqual('seventeenth');
         expect(toWords(30, true)).toEqual('thirtieth');
         expect(toWords(123, true)).toEqual('one hundred twenty-third');
     });
-    
-    it('should throw a RangeError if input is greater or lesser than MAX_SAFE_INTEGER', function() {
+
+    it('should throw a RangeError if input is greater or lesser than MAX_SAFE_INTEGER', function () {
         var unsafe = MAX_SAFE_INTEGER + 100;
 
-        expect(function() {
+        expect(function () {
             toWords(unsafe);
         }).toThrowError(/Input is not a safe number/);
 
-        expect(function() {
+        expect(function () {
             toWords(-unsafe);
         }).toThrowError(/Input is not a safe number/);
     });
+
 });
 
 function formatNumber(number) {

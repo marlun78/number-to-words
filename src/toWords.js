@@ -33,6 +33,8 @@ var TENTHS_LESS_THAN_HUNDRED = [
 function toWords(number, asOrdinal) {
     var words;
     var num = parseInt(number, 10);
+    // decimal parts within ordinals will be discarded for backward compatibility
+    var decimalPart = asOrdinal ? "0" : getDecimalPart(number);
 
     if (!isFinite(num)) {
         throw new TypeError(
@@ -44,7 +46,8 @@ function toWords(number, asOrdinal) {
             'Input is not a safe number, it’s either too large or too small.'
         );
     }
-    words = generateWords(num);
+
+    words = generateWords(num) + generateFractionalWords(decimalPart);
     return asOrdinal ? makeOrdinal(words) : words;
 }
 
@@ -102,11 +105,43 @@ function generateWords(number) {
     } else if (number <= MAX) {
         remainder = number % ONE_QUADRILLION;
         word = generateWords(Math.floor(number / ONE_QUADRILLION)) +
-        ' quadrillion,';
+            ' quadrillion,';
     }
 
     words.push(word);
     return generateWords(remainder, words);
+}
+
+function generateFractionalWords(decimalPart) {
+    var numerator, denominator, digits;
+
+    // no value
+    if (decimalPart === "0") { return ''; }
+
+    // get value
+    digits = decimalPart.length;
+    
+    // get denominator (tenths, hundredths, etc.)
+    denominator = generateWords(Math.pow(10, digits)) + 'th';
+    
+    // remove leading 'one' (for powers > 1)
+    if (digits > 1) denominator = denominator.substr(4);
+
+    // pluralize
+    if (parseInt(decimalPart) > 1) { denominator = denominator + 's'};
+    
+    // get numerator
+    numerator = generateWords(decimalPart);
+
+    return ' and ' + numerator + ' ' + denominator;
+}
+
+function getDecimalPart(number) {
+    var integer = Math.floor(number).toString();
+    var numberAsString = number.toString();
+    if (integer.length === numberAsString.length)   // numbers are identical; no decimal part
+        return "0";
+    return numberAsString.substring(integer.length + 1); // return everything to the right of the decimal marker
 }
 
 module.exports = toWords;

@@ -16,21 +16,20 @@ ordinal numbers.
 
 #### `toOrdinal(number)`
 Converts an integer into a string with an ordinal postfix.
-If number is decimal, the decimals will be removed.
+If number has a decimal portion, it will be removed.
 ```js
 var converter = require('number-to-words');
 converter.toOrdinal(21); // => “21st”
 ```
 
 #### `toWords(number)`
-Converts an integer into words.
-If number is decimal, the decimals will be removed.
+Converts a number into words.
 ```js
 var converter = require('number-to-words');
 converter.toWords(13); // => “thirteen”
 
 // Decimal numbers:
-converter.toWords(2.9); // => “two”
+converter.toWords(2.9); // => “two and nine tenths”
 
 // Negative numbers:
 converter.toWords(-3); // => “minus three”
@@ -41,10 +40,11 @@ converter.toWords(9007199254740992); // => “nine quadrillion, seven trillion, 
 
 #### `toWordsOrdinal(number)`
 Converts a number into ordinal words.
-If number is decimal, the decimals will be removed.
+If number has a decimal portion, it will be discarded.
 ```js
 var converter = require('number-to-words');
 converter.toWordsOrdinal(21); // => “twenty-first”
+converter.toWordsOrdinal(3.5); // => “third”
 ```
 
 
@@ -58,6 +58,9 @@ See [roadmap](ROADMAP.md) for details.
 
 
 ### Change Log
+
+##### Unreleased
+- ADD support for decimal numbers in `toWords`. For backward compatibility, `toOrdinal` removes the decimal portion.
 
 ##### Version 1.2.4 (final 1.x release)
 - Bug fix in `toOrdinal`. When passed -11, -12 and -13 it returned an incorrect suffix ([#15](https://github.com/marlun78/number-to-words/issues/15)). Thanks to @dmrzn.
