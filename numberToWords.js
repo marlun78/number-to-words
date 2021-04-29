@@ -13,12 +13,14 @@
         typeof global == 'object' && global.global === global && global ||
         this;
 
-    // ========== file: /src/maxSafeInteger.js ==========
+    // ========== file: \src\maxSafeInteger.js ==========
+
 
 var MAX_SAFE_INTEGER = 9007199254740991;
 
 
-// ========== file: /src/isFinite.js ==========
+// ========== file: \src\isFinite.js ==========
+
 
 // Simplified https://gist.github.com/marlun78/885eb0021e980c6ce0fb
 function isFinite(value) {
@@ -26,7 +28,9 @@ function isFinite(value) {
 }
 
 
-// ========== file: /src/isSafeNumber.js ==========
+// ========== file: \src\isSafeNumber.js ==========
+
+
 
 
 function isSafeNumber(value) {
@@ -34,7 +38,8 @@ function isSafeNumber(value) {
 }
 
 
-// ========== file: /src/makeOrdinal.js ==========
+// ========== file: \src\makeOrdinal.js ==========
+
 
 var ENDS_WITH_DOUBLE_ZERO_PATTERN = /(hundred|thousand|(m|b|tr|quadr)illion)$/;
 var ENDS_WITH_TEEN_PATTERN = /teen$/;
@@ -83,7 +88,10 @@ function replaceWithOrdinalVariant(match, numberWord) {
 }
 
 
-// ========== file: /src/toOrdinal.js ==========
+// ========== file: \src\toOrdinal.js ==========
+
+
+
 
 
 /**
@@ -118,7 +126,11 @@ function toOrdinal(number) {
 }
 
 
-// ========== file: /src/toWords.js ==========
+// ========== file: \src\toWords.js ==========
+
+
+
+
 
 
 var TEN = 10;
@@ -150,6 +162,7 @@ var TENTHS_LESS_THAN_HUNDRED = [
 function toWords(number, asOrdinal) {
     var words;
     var num = parseInt(number, 10);
+    var decimalPart = parseFloat(number) - num;
 
     if (!isFinite(num)) {
         throw new TypeError(
@@ -161,7 +174,12 @@ function toWords(number, asOrdinal) {
             'Input is not a safe number, it’s either too large or too small.'
         );
     }
-    words = generateWords(num);
+    if (decimalPart !== 0 && asOrdinal) {
+        throw new TypeError(
+            'Decimal portions cannot be generated into ordinals.'
+        )
+    }
+    words = generateWords(num) + generateFractionalWords(decimalPart);
     return asOrdinal ? makeOrdinal(words) : words;
 }
 
@@ -219,15 +237,32 @@ function generateWords(number) {
     } else if (number <= MAX) {
         remainder = number % ONE_QUADRILLION;
         word = generateWords(Math.floor(number / ONE_QUADRILLION)) +
-        ' quadrillion,';
+            ' quadrillion,';
     }
 
     words.push(word);
     return generateWords(remainder, words);
 }
 
+function generateFractionalWords(number) {
+    var numerator, denominator, decimalString;
 
-// ========== file: /src/toWordsOrdinal.js ==========
+    // no value
+    if (number === 0) { return ''; }
+
+    decimalString = number.toString.split('.')[1];      // TODO: i18n on decimal point
+    digits = decimalString.length;
+    denominator = generateWords(Math.pow(10 ^ digits)).substr(4).replace(',', 'ths');
+    numerator = generateWords(decimalString);
+
+    return ' and ' + numerator + ' ' + denominator;
+}
+
+
+// ========== file: \src\toWordsOrdinal.js ==========
+
+
+
 
 
 /**
@@ -241,7 +276,7 @@ function toWordsOrdinal(number) {
     return makeOrdinal(words);
 }
 
-
+
 
     var numberToWords = {
         toOrdinal: toOrdinal,
@@ -258,4 +293,4 @@ function toWordsOrdinal(number) {
         root.numberToWords = numberToWords;
     }
 
-}());
+}());
