@@ -14,6 +14,7 @@ describe('toWords', function () {
         { input: 1.99, expect: 'one and ninety-nine hundredths' },
         { input: 2, expect: 'two' },
         { input: 3, expect: 'three' },
+        { input: 3.2135, expect: 'three and two thousand, one hundred thirty-five ten thousandths' },
         { input: 4, expect: 'four' },
         { input: 5, expect: 'five' },
         { input: 6, expect: 'six' },

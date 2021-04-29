@@ -124,8 +124,8 @@ function generateFractionalWords(decimalPart) {
     // get denominator (tenths, hundredths, etc.)
     denominator = generateWords(Math.pow(10, digits)) + 'th';
     
-    // remove leading 'one' (for powers > 1)
-    if (digits > 1) denominator = denominator.substr(4);
+    // remove leading 'one<space>' (like one thousand -> thousandth) 
+    denominator = denominator.replace(/^one /, '');
 
     // pluralize
     if (parseInt(decimalPart) > 1) { denominator = denominator + 's'};
