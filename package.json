@@ -28,8 +28,10 @@
     "scripts": {
         "build": "gulp build",
         "lint": "node node_modules/eslint/bin/eslint.js .",
-        "test": "npm run lint && npm run test:node",
+        "test": "npm run lint && npm run test:node && npm run test:bundle && npm run test:min",
         "test:node": "jasmine",
+        "test:bundle": "TEST_TARGET=bundle jasmine",
+        "test:min": "TEST_TARGET=min jasmine",
         "test:phantom": "phantomjs ./spec/phantom/run-jasmine3.js 'http://localhost:3456/spec/'",
         "test:server": "http-server ./ -p 3456 -c-1"
     },
