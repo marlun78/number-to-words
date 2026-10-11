@@ -12,6 +12,7 @@
         "dmrzn (https://github.com/dmrzn)"
     ],
     "devDependencies": {
+        "@playwright/test": "1.63.0",
         "eslint": "5.3.0",
         "fancy-log": "1.3.2",
         "gulp": "4.0.0",
@@ -22,7 +23,6 @@
         "gulp-wrap": "0.14.0",
         "http-server": "0.11.1",
         "jasmine": "3.2.0",
-        "phantomjs-prebuilt": "2.1.16",
         "uglify-save-license": "0.4.1"
     },
     "scripts": {
@@ -32,7 +32,7 @@
         "test:node": "jasmine",
         "test:bundle": "TEST_TARGET=bundle jasmine",
         "test:min": "TEST_TARGET=min jasmine",
-        "test:phantom": "phantomjs ./spec/phantom/run-jasmine3.js 'http://localhost:3456/spec/'",
+        "test:browser": "playwright test",
         "test:server": "http-server ./ -p 3456 -c-1"
     },
     "repository": {

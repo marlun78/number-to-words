@@ -2,3 +2,5 @@
 .idea
 node_modules
 notes.md
+playwright-report
+test-results
