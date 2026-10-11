@@ -38,7 +38,9 @@
         ".eslint",
         ".npmrc",
         ".prettierrc",
+        ".github",
         "gulpfile.js",
+        "playwright.config.js",
         "wrapBundle.tmpl",
         "wrapEach.tmpl"
     ]

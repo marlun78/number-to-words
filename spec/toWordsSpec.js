@@ -1,7 +1,7 @@
 'use strict';
 
 var MAX_SAFE_INTEGER = 9007199254740991;
-var toWords = typeof require !== 'undefined' ? require('../src/toWords') : window.numberToWords.toWords;
+var toWords = typeof require !== 'undefined' ? require('./support/numberToWords').toWords : window.numberToWords.toWords;
 
 describe('toWords', function () {
     var tests = [

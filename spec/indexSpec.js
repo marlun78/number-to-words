@@ -1,6 +1,6 @@
 'use strict';
 
-var index = typeof require !== 'undefined' ? require('../src') : window.numberToWords;
+var index = typeof require !== 'undefined' ? require('./support/numberToWords') : window.numberToWords;
 
 describe('index', function () {
     it('should expose a toOrdinal method', function () {
