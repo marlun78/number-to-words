@@ -1,10 +1,13 @@
-'use strict';
+import { describe, expect, it } from 'vitest';
+import { toWords } from 'number-to-words';
 
-var MAX_SAFE_INTEGER = 9007199254740991;
-var toWords = typeof require !== 'undefined' ? require('./support/numberToWords').toWords : window.numberToWords.toWords;
+// Some tests pass input that the types don't allow
+const toWordsAny = toWords as (input: unknown, asOrdinal?: boolean) => string;
 
-describe('toWords', function () {
-    var tests = [
+const MAX_SAFE_INTEGER = 9007199254740991;
+
+describe('toWords', () => {
+    const tests = [
         { input: -1, expect: 'minus one' },
         { input: 0, expect: 'zero' },
         { input: 1, expect: 'one' },
@@ -41,13 +44,25 @@ describe('toWords', function () {
         { input: 1000, expect: 'one thousand' },
         { input: 2222, expect: 'two thousand, two hundred twenty-two' },
         { input: 10000, expect: 'ten thousand' },
-        { input: 33333, expect: 'thirty-three thousand, three hundred thirty-three' },
+        {
+            input: 33333,
+            expect: 'thirty-three thousand, three hundred thirty-three'
+        },
         { input: 100000, expect: 'one hundred thousand' },
-        { input: 444444, expect: 'four hundred forty-four thousand, four hundred forty-four' },
+        {
+            input: 444444,
+            expect: 'four hundred forty-four thousand, four hundred forty-four'
+        },
         { input: 1000000, expect: 'one million' },
-        { input: 5555555, expect: 'five million, five hundred fifty-five thousand, five hundred fifty-five' },
+        {
+            input: 5555555,
+            expect: 'five million, five hundred fifty-five thousand, five hundred fifty-five'
+        },
         { input: 10000000, expect: 'ten million' },
-        { input: 66666666, expect: 'sixty-six million, six hundred sixty-six thousand, six hundred sixty-six' },
+        {
+            input: 66666666,
+            expect: 'sixty-six million, six hundred sixty-six thousand, six hundred sixty-six'
+        },
         { input: 100000000, expect: 'one hundred million' },
         {
             input: 777777777,
@@ -94,39 +109,38 @@ describe('toWords', function () {
         }
     ];
 
-    function addTest(test) {
-        it('should, if passed ' + formatNumber(test.input) + ', return ' + test.expect, function () {
-            expect(toWords(test.input)).toEqual(test.expect);
-        });
-    }
-
-    tests.forEach(addTest);
+    tests.forEach(test => {
+        it(
+            'should, if passed ' +
+                formatNumber(test.input) +
+                ', return ' +
+                test.expect,
+            () => {
+                expect(toWords(test.input)).toBe(test.expect);
+            }
+        );
+    });
 
     // Note! This is deprecated, use toWordsOrdinal() instead!
-    it('should return the number with an ordinal word if passed a second truthy argument', function () {
-        expect(toWords(1, true)).toEqual('first');
-        expect(toWords(2, true)).toEqual('second');
-        expect(toWords(3, true)).toEqual('third');
-        expect(toWords(10, true)).toEqual('tenth');
-        expect(toWords(17, true)).toEqual('seventeenth');
-        expect(toWords(30, true)).toEqual('thirtieth');
-        expect(toWords(123, true)).toEqual('one hundred twenty-third');
+    it('should return the number with an ordinal word if passed a second truthy argument', () => {
+        expect(toWords(1, true)).toBe('first');
+        expect(toWords(2, true)).toBe('second');
+        expect(toWords(3, true)).toBe('third');
+        expect(toWords(10, true)).toBe('tenth');
+        expect(toWords(17, true)).toBe('seventeenth');
+        expect(toWords(30, true)).toBe('thirtieth');
+        expect(toWords(123, true)).toBe('one hundred twenty-third');
     });
-    
-    it('should throw a RangeError if input is greater or lesser than MAX_SAFE_INTEGER', function() {
-        var unsafe = MAX_SAFE_INTEGER + 100;
 
-        expect(function() {
-            toWords(unsafe);
-        }).toThrowError(/Input is not a safe number/);
+    it('should throw a RangeError if input is greater or lesser than MAX_SAFE_INTEGER', () => {
+        const unsafe = MAX_SAFE_INTEGER + 100;
 
-        expect(function() {
-            toWords(-unsafe);
-        }).toThrowError(/Input is not a safe number/);
+        expect(() => toWords(unsafe)).toThrow(/Input is not a safe number/);
+        expect(() => toWords(-unsafe)).toThrow(/Input is not a safe number/);
     });
 
     // Pins how input is converted to an integer, so the fix for #50 can't change it
-    var conversions = [
+    const conversions = [
         { label: '-1.9', input: -1.9, expect: 'minus one' },
         { label: '-0.5', input: -0.5, expect: 'zero' },
         { label: '-0', input: -0, expect: 'zero' },
@@ -139,13 +153,16 @@ describe('toWords', function () {
         { label: '[12]', input: [12], expect: 'twelve' }
     ];
 
-    conversions.forEach(function (test) {
-        it('should, if passed ' + test.label + ', return ' + test.expect, function () {
-            expect(toWords(test.input)).toEqual(test.expect);
-        });
+    conversions.forEach(test => {
+        it(
+            'should, if passed ' + test.label + ', return ' + test.expect,
+            () => {
+                expect(toWordsAny(test.input)).toBe(test.expect);
+            }
+        );
     });
 
-    var notFinite = [
+    const notFinite = [
         { label: 'NaN', input: NaN },
         { label: 'Infinity', input: Infinity },
         { label: '-Infinity', input: -Infinity },
@@ -157,35 +174,33 @@ describe('toWords', function () {
         { label: '{}', input: {} }
     ];
 
-    notFinite.forEach(function (test) {
-        it('should throw a TypeError if passed ' + test.label, function () {
-            expect(function () {
-                toWords(test.input);
-            }).toThrowError(TypeError, /Not a finite number/);
+    notFinite.forEach(test => {
+        it('should throw a TypeError if passed ' + test.label, () => {
+            expect(() => toWordsAny(test.input)).toThrow(TypeError);
+            expect(() => toWordsAny(test.input)).toThrow(/Not a finite number/);
         });
     });
 
     // #50: parseInt() read exponent notation as its leading digit, e.g. 1e21 ('1e+21') became 1
-    [1e21, 1.5e21, -1e21, 1e100, Number.MAX_VALUE].forEach(function (input) {
-        it('should throw a RangeError if passed ' + input, function () {
-            expect(function () {
-                toWords(input);
-            }).toThrowError(RangeError, /Input is not a safe number/);
+    [1e21, 1.5e21, -1e21, 1e100, Number.MAX_VALUE].forEach(input => {
+        it('should throw a RangeError if passed ' + input, () => {
+            expect(() => toWords(input)).toThrow(RangeError);
+            expect(() => toWords(input)).toThrow(/Input is not a safe number/);
         });
     });
 
-    [1e-7, 2e-7, 1.2345e-7, 9.99e-7, -2e-7, Number.MIN_VALUE].forEach(function (input) {
-        it('should, if passed ' + input + ', return zero', function () {
-            expect(toWords(input)).toEqual('zero');
+    [1e-7, 2e-7, 1.2345e-7, 9.99e-7, -2e-7, Number.MIN_VALUE].forEach(input => {
+        it('should, if passed ' + input + ', return zero', () => {
+            expect(toWords(input)).toBe('zero');
         });
     });
 });
 
-function formatNumber(number) {
-    var result = String(number).split('').reverse().map(function (num, index) {
-        if (index % 3 === 2) return '.' + num;
-        return num;
-    }).reverse();
-    var length = result.length;
-    return result.join('') + ' (' + length + ')';
+function formatNumber(number: number): string {
+    const result = String(number)
+        .split('')
+        .reverse()
+        .map((num, index) => (index % 3 === 2 ? '.' + num : num))
+        .reverse();
+    return result.join('') + ' (' + result.length + ')';
 }

@@ -1,9 +1,8 @@
-'use strict';
+import { describe, expect, it } from 'vitest';
+import { toWordsOrdinal } from 'number-to-words';
 
-var toWordsOrdinal = typeof require !== 'undefined' ? require('./support/numberToWords').toWordsOrdinal : window.numberToWords.toWordsOrdinal;
-
-describe('toWordsOrdinal', function () {
-    var tests = [
+describe('toWordsOrdinal', () => {
+    const tests = [
         { input: '0', expect: 'zeroth' },
         { input: '1', expect: 'first' },
         { input: '2', expect: 'second' },
@@ -49,46 +48,58 @@ describe('toWordsOrdinal', function () {
         { input: '1000000000000000', expect: 'one quadrillionth' }
     ];
 
-    function addTest(test) {
-        it('should, if passed "' + test.input + '", return "' + test.expect + '"', function () {
-            expect(toWordsOrdinal(test.input)).toEqual(test.expect);
-        });
-    }
-
-    tests.forEach(addTest);
+    tests.forEach(test => {
+        it(
+            'should, if passed "' +
+                test.input +
+                '", return "' +
+                test.expect +
+                '"',
+            () => {
+                expect(toWordsOrdinal(test.input)).toBe(test.expect);
+            }
+        );
+    });
 
     // Pins how input is converted to an integer, so the fix for #50 can't change it
-    var conversions = [
+    const conversions = [
         { label: '1.9', input: 1.9, expect: 'first' },
         { label: '-1.9', input: -1.9, expect: 'minus first' },
         { label: '-0.5', input: -0.5, expect: 'zeroth' },
         { label: '0.000001', input: 0.000001, expect: 'zeroth' }
     ];
 
-    conversions.forEach(function (test) {
-        it('should, if passed ' + test.label + ', return "' + test.expect + '"', function () {
-            expect(toWordsOrdinal(test.input)).toEqual(test.expect);
-        });
+    conversions.forEach(test => {
+        it(
+            'should, if passed ' +
+                test.label +
+                ', return "' +
+                test.expect +
+                '"',
+            () => {
+                expect(toWordsOrdinal(test.input)).toBe(test.expect);
+            }
+        );
     });
 
-    it('should throw a TypeError if passed a value that is not a finite number', function () {
-        expect(function () {
-            toWordsOrdinal(NaN);
-        }).toThrowError(TypeError, /Not a finite number/);
+    it('should throw a TypeError if passed a value that is not a finite number', () => {
+        expect(() => toWordsOrdinal(NaN)).toThrow(TypeError);
+        expect(() => toWordsOrdinal(NaN)).toThrow(/Not a finite number/);
     });
 
     // #50: parseInt() read exponent notation as its leading digit, e.g. 1e21 ('1e+21') became 1
-    [1e21, -1e21].forEach(function (input) {
-        it('should throw a RangeError if passed ' + input, function () {
-            expect(function () {
-                toWordsOrdinal(input);
-            }).toThrowError(RangeError, /Input is not a safe number/);
+    [1e21, -1e21].forEach(input => {
+        it('should throw a RangeError if passed ' + input, () => {
+            expect(() => toWordsOrdinal(input)).toThrow(RangeError);
+            expect(() => toWordsOrdinal(input)).toThrow(
+                /Input is not a safe number/
+            );
         });
     });
 
-    [2e-7, -2e-7].forEach(function (input) {
-        it('should, if passed ' + input + ', return "zeroth"', function () {
-            expect(toWordsOrdinal(input)).toEqual('zeroth');
+    [2e-7, -2e-7].forEach(input => {
+        it('should, if passed ' + input + ', return "zeroth"', () => {
+            expect(toWordsOrdinal(input)).toBe('zeroth');
         });
     });
 });

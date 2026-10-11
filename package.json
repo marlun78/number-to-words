@@ -2,8 +2,26 @@
     "name": "number-to-words",
     "description": "Contains some util methods for converting numbers into words, ordinal words and ordinal numbers.",
     "version": "1.2.5",
-    "main": "./src",
-    "browser": "./numberToWords.min.js",
+    "type": "module",
+    "main": "./dist/index.cjs",
+    "module": "./dist/index.js",
+    "types": "./dist/index.d.cts",
+    "exports": {
+        ".": {
+            "import": "./dist/index.js",
+            "require": "./dist/index.cjs"
+        },
+        "./package.json": "./package.json"
+    },
+    "unpkg": "./dist/number-to-words.min.js",
+    "jsdelivr": "./dist/number-to-words.min.js",
+    "files": [
+        "dist"
+    ],
+    "sideEffects": false,
+    "engines": {
+        "node": ">=18"
+    },
     "author": "Martin Eneqvist (https://github.com/marlun78)",
     "contributors": [
         "Aleksey Pilyugin (https://github.com/pilyugin)",
@@ -12,32 +30,32 @@
         "dmrzn (https://github.com/dmrzn)"
     ],
     "devDependencies": {
-        "@playwright/test": "1.63.0",
-        "eslint": "5.3.0",
-        "fancy-log": "1.3.2",
-        "gulp": "4.0.0",
-        "gulp-concat": "2.6.1",
-        "gulp-rename": "1.4.0",
-        "gulp-replace": "1.0.0",
-        "gulp-uglify": "3.0.1",
-        "gulp-wrap": "0.14.0",
-        "http-server": "0.11.1",
-        "jasmine": "3.2.0",
-        "uglify-save-license": "0.4.1"
+        "@arethetypeswrong/core": "0.18.5",
+        "@types/node": "24.19.0",
+        "@vitest/browser-playwright": "5.0.2",
+        "oxfmt": "0.70.0",
+        "oxlint": "1.85.0",
+        "oxlint-tsgolint": "7.0.2003",
+        "playwright": "1.63.0",
+        "publint": "0.3.24",
+        "tsdown": "0.23.0",
+        "typescript": "7.0.2",
+        "vitest": "5.0.2"
     },
     "scripts": {
-        "build": "gulp build",
-        "lint": "node node_modules/eslint/bin/eslint.js .",
-        "test": "npm run lint && npm run test:node && npm run test:bundle && npm run test:min",
-        "test:node": "jasmine",
-        "test:bundle": "TEST_TARGET=bundle jasmine",
-        "test:min": "TEST_TARGET=min jasmine",
-        "test:browser": "playwright test",
-        "test:server": "http-server ./ -p 3456 -c-1"
+        "build": "tsdown",
+        "typecheck": "tsc -b",
+        "lint": "oxlint --type-aware --deny-warnings",
+        "format": "oxfmt",
+        "format:check": "oxfmt --check",
+        "test": "npm run build && vitest run --project src --project esm --project cjs",
+        "test:browser": "npm run build && vitest run --project iife --project iife-min",
+        "test:smoke": "npm run build && node test/smoke.mjs",
+        "prepublishOnly": "npm run build"
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/marlun78/number-to-words"
+        "url": "git+https://github.com/marlun78/number-to-words.git"
     },
     "license": "MIT",
     "bugs": {

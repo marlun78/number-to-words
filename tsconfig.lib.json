@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+        "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.lib.tsbuildinfo",
+        "target": "es2015",
+        // ES2015 is the supported baseline, so newer built-ins are type errors in the library code
+        "lib": ["es2015"],
+        "types": [],
+        "module": "esnext",
+        "moduleResolution": "bundler",
+        "strict": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "declaration": true,
+        "isolatedDeclarations": true,
+        "erasableSyntaxOnly": true,
+        "verbatimModuleSyntax": true,
+        "noEmit": true
+    },
+    "include": ["src"],
+    "exclude": ["src/**/*.test.ts"]
+}

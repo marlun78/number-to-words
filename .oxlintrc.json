@@ -1,0 +1,22 @@
+{
+    "$schema": "./node_modules/oxlint/configuration_schema.json",
+    "plugins": ["typescript", "unicorn", "oxc", "import", "vitest"],
+    "categories": {
+        "correctness": "error",
+        "suspicious": "warn"
+    },
+    "rules": {
+        // Suggests toReversed(), which is ES2023 and newer than the ES2015 baseline
+        "unicorn/no-array-reverse": "off"
+    },
+    "overrides": [
+        {
+            // Tests pass invalid input on purpose
+            "files": ["**/*.test.ts"],
+            "rules": {
+                "typescript/no-unsafe-type-assertion": "off"
+            }
+        }
+    ],
+    "ignorePatterns": ["dist"]
+}
