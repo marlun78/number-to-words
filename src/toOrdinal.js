@@ -11,7 +11,10 @@ var isSafeNumber = require('./isSafeNumber');
  * @returns {string}
  */
 function toOrdinal(number) {
-    var num = parseInt(number, 10);
+    // Numbers skip parseInt(), which reads exponent notation as its leading digit: 1e21 → '1e+21' → 1
+    var num = typeof number === 'number'
+        ? (number < 0 ? Math.ceil(number) : Math.floor(number))
+        : parseInt(number, 10);
 
     if (!isFinite(num)) {
         throw new TypeError(

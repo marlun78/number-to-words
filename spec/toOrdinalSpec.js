@@ -89,4 +89,19 @@ describe('toOrdinal', function () {
             }).toThrowError(TypeError, /Not a finite number/);
         });
     });
+
+    // #50: parseInt() read exponent notation as its leading digit, e.g. 1e21 ('1e+21') became 1
+    [1e21, 1.5e21, -1e21, 1e100, Number.MAX_VALUE].forEach(function (input) {
+        it('should throw a RangeError if passed ' + input, function () {
+            expect(function () {
+                toOrdinal(input);
+            }).toThrowError(RangeError, /Input is not a safe number/);
+        });
+    });
+
+    [1e-7, 2e-7, 1.2345e-7, 9.99e-7, -2e-7, Number.MIN_VALUE].forEach(function (input) {
+        it('should, if passed ' + input + ', return 0th', function () {
+            expect(toOrdinal(input)).toEqual('0th');
+        });
+    });
 });
