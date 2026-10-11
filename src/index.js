@@ -3,5 +3,6 @@
 module.exports = {
     toOrdinal: require('./toOrdinal'),
     toWords: require('./toWords'),
-    toWordsOrdinal: require('./toWordsOrdinal')
+    toWordsOrdinal: require('./toWordsOrdinal'),
+    toWordsNumeralAdverb: require('./toWordsNumeralAdverb')
 };
