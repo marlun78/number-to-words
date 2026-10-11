@@ -124,6 +124,46 @@ describe('toWords', function () {
             toWords(-unsafe);
         }).toThrowError(/Input is not a safe number/);
     });
+
+    // Pins how input is converted to an integer, so the fix for #50 can't change it
+    var conversions = [
+        { label: '-1.9', input: -1.9, expect: 'minus one' },
+        { label: '-0.5', input: -0.5, expect: 'zero' },
+        { label: '-0', input: -0, expect: 'zero' },
+        { label: '0.000001', input: 0.000001, expect: 'zero' },
+        { label: '"12"', input: '12', expect: 'twelve' },
+        { label: '"-12.9"', input: '-12.9', expect: 'minus twelve' },
+        { label: '" 12"', input: ' 12', expect: 'twelve' },
+        { label: '"12abc"', input: '12abc', expect: 'twelve' },
+        { label: '"0x1A"', input: '0x1A', expect: 'zero' },
+        { label: '[12]', input: [12], expect: 'twelve' }
+    ];
+
+    conversions.forEach(function (test) {
+        it('should, if passed ' + test.label + ', return ' + test.expect, function () {
+            expect(toWords(test.input)).toEqual(test.expect);
+        });
+    });
+
+    var notFinite = [
+        { label: 'NaN', input: NaN },
+        { label: 'Infinity', input: Infinity },
+        { label: '-Infinity', input: -Infinity },
+        { label: '""', input: '' },
+        { label: '"abc"', input: 'abc' },
+        { label: 'true', input: true },
+        { label: 'null', input: null },
+        { label: 'undefined', input: undefined },
+        { label: '{}', input: {} }
+    ];
+
+    notFinite.forEach(function (test) {
+        it('should throw a TypeError if passed ' + test.label, function () {
+            expect(function () {
+                toWords(test.input);
+            }).toThrowError(TypeError, /Not a finite number/);
+        });
+    });
 });
 
 function formatNumber(number) {
