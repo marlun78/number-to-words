@@ -56,4 +56,39 @@ describe('toWordsOrdinal', function () {
     }
 
     tests.forEach(addTest);
+
+    // Pins how input is converted to an integer, so the fix for #50 can't change it
+    var conversions = [
+        { label: '1.9', input: 1.9, expect: 'first' },
+        { label: '-1.9', input: -1.9, expect: 'minus first' },
+        { label: '-0.5', input: -0.5, expect: 'zeroth' },
+        { label: '0.000001', input: 0.000001, expect: 'zeroth' }
+    ];
+
+    conversions.forEach(function (test) {
+        it('should, if passed ' + test.label + ', return "' + test.expect + '"', function () {
+            expect(toWordsOrdinal(test.input)).toEqual(test.expect);
+        });
+    });
+
+    it('should throw a TypeError if passed a value that is not a finite number', function () {
+        expect(function () {
+            toWordsOrdinal(NaN);
+        }).toThrowError(TypeError, /Not a finite number/);
+    });
+
+    // #50: parseInt() read exponent notation as its leading digit, e.g. 1e21 ('1e+21') became 1
+    [1e21, -1e21].forEach(function (input) {
+        it('should throw a RangeError if passed ' + input, function () {
+            expect(function () {
+                toWordsOrdinal(input);
+            }).toThrowError(RangeError, /Input is not a safe number/);
+        });
+    });
+
+    [2e-7, -2e-7].forEach(function (input) {
+        it('should, if passed ' + input + ', return "zeroth"', function () {
+            expect(toWordsOrdinal(input)).toEqual('zeroth');
+        });
+    });
 });

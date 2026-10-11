@@ -59,7 +59,10 @@ See [roadmap](ROADMAP.md) for details.
 
 ### Change Log
 
-##### Version 1.2.4 (final 1.x release)
+##### Version 1.2.5
+- Bug fix in `toWords`, `toOrdinal` and `toWordsOrdinal`. Numbers in exponent notation were read as their first digit, e.g. `toWords(1e21)` returned “one” instead of throwing a `RangeError`, and `toWords(2e-7)` returned “two” instead of “zero” ([#50](https://github.com/marlun78/number-to-words/issues/50)). Thanks to @philppplik for the report.
+
+##### Version 1.2.4
 - Bug fix in `toOrdinal`. When passed -11, -12 and -13 it returned an incorrect suffix ([#15](https://github.com/marlun78/number-to-words/issues/15)). Thanks to @dmrzn.
 - `toOrdinal` and `toWords` now throws a more precise error when passed an unsafe number ([#13](https://github.com/marlun78/number-to-words/pull/13)). Thanks to @adrianomelo.
 
