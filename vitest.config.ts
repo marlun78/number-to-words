@@ -14,11 +14,7 @@ function target(path: string) {
     };
 }
 
-// Specs of internal modules only run against the source
-const publicSpecs = {
-    include: ['src/**/*.test.ts'],
-    exclude: ['src/is-safe-number.test.ts']
-};
+const include = ['src/**/*.test.ts'];
 
 // A function, because Vitest names each instance after its project, so projects can't share them
 function browsers() {
@@ -39,23 +35,23 @@ export default defineConfig({
         projects: [
             {
                 resolve: target('./src/index.ts'),
-                test: { name: 'src', include: ['src/**/*.test.ts'] }
+                test: { name: 'src', include }
             },
             {
                 resolve: target('./dist/index.js'),
-                test: { name: 'esm', ...publicSpecs }
+                test: { name: 'esm', include }
             },
             {
                 resolve: target('./test/targets/cjs.ts'),
-                test: { name: 'cjs', ...publicSpecs }
+                test: { name: 'cjs', include }
             },
             {
                 resolve: target('./test/targets/iife.ts'),
-                test: { name: 'iife', ...publicSpecs, browser: browsers() }
+                test: { name: 'iife', include, browser: browsers() }
             },
             {
                 resolve: target('./test/targets/iife-min.ts'),
-                test: { name: 'iife-min', ...publicSpecs, browser: browsers() }
+                test: { name: 'iife-min', include, browser: browsers() }
             }
         ]
     }

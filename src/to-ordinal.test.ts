@@ -4,8 +4,6 @@ import { toOrdinal } from 'number-to-words';
 // Some tests pass input that the types don't allow
 const toOrdinalAny = toOrdinal as (input: unknown) => string;
 
-const MAX_SAFE_INTEGER = 9007199254740991;
-
 describe('toOrdinal', () => {
     const tests = [
         { input: -121, expect: '-121st' },
@@ -43,7 +41,7 @@ describe('toOrdinal', () => {
     });
 
     it('should throw a RangeError if input is greater or lesser than MAX_SAFE_INTEGER', () => {
-        const unsafe = MAX_SAFE_INTEGER + 100;
+        const unsafe = Number.MAX_SAFE_INTEGER + 100;
 
         expect(() => toOrdinal(unsafe)).toThrow(/Input is not a safe number/);
         expect(() => toOrdinal(-unsafe)).toThrow(/Input is not a safe number/);

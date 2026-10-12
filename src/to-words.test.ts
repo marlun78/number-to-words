@@ -4,8 +4,6 @@ import { toWords } from 'number-to-words';
 // Some tests pass input that the types don't allow
 const toWordsAny = toWords as (input: unknown, asOrdinal?: boolean) => string;
 
-const MAX_SAFE_INTEGER = 9007199254740991;
-
 describe('toWords', () => {
     const tests = [
         { input: -1, expect: 'minus one' },
@@ -104,7 +102,7 @@ describe('toWords', () => {
             expect: 'five quadrillion, five hundred fifty-five trillion, five hundred fifty-five billion, five hundred fifty-five million, five hundred fifty-five thousand, five hundred fifty-five'
         },
         {
-            input: MAX_SAFE_INTEGER,
+            input: Number.MAX_SAFE_INTEGER,
             expect: 'nine quadrillion, seven trillion, one hundred ninety-nine billion, two hundred fifty-four million, seven hundred forty thousand, nine hundred ninety-one'
         }
     ];
@@ -133,7 +131,7 @@ describe('toWords', () => {
     });
 
     it('should throw a RangeError if input is greater or lesser than MAX_SAFE_INTEGER', () => {
-        const unsafe = MAX_SAFE_INTEGER + 100;
+        const unsafe = Number.MAX_SAFE_INTEGER + 100;
 
         expect(() => toWords(unsafe)).toThrow(/Input is not a safe number/);
         expect(() => toWords(-unsafe)).toThrow(/Input is not a safe number/);

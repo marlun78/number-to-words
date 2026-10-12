@@ -1,6 +1,3 @@
-import { isFinite } from './is-finite';
-import { isSafeNumber } from './is-safe-number';
-
 /**
  * Converts an integer into a string with an ordinal postfix.
  * If number is decimal, the decimals will be removed.
@@ -15,12 +12,12 @@ export function toOrdinal(number: number | string): string {
                 : Math.floor(number)
             : parseInt(number, 10);
 
-    if (!isFinite(num)) {
+    if (!Number.isFinite(num)) {
         throw new TypeError(
             'Not a finite number: ' + number + ' (' + typeof number + ')'
         );
     }
-    if (!isSafeNumber(num)) {
+    if (!Number.isSafeInteger(num)) {
         throw new RangeError(
             'Input is not a safe number, it’s either too large or too small.'
         );
