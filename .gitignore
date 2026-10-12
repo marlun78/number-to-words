@@ -1,6 +1,7 @@
 .DS_Store
 .idea
+.vitest
+dist
 node_modules
 notes.md
-playwright-report
-test-results
+TODO.md
