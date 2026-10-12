@@ -1,76 +1,76 @@
 name: CI
 
 on:
-    push:
-        branches: [master]
-    pull_request:
+  push:
+    branches: [master]
+  pull_request:
 
 permissions:
-    contents: read
+  contents: read
 
 jobs:
-    check:
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v7
-            - uses: actions/setup-node@v7
-              with:
-                  node-version: '24'
-                  cache: npm
-            - run: npm ci
-            - run: npm run format:check
-            - run: npm run lint
-            - run: npm run typecheck
-            # Also checks the package with publint and Are the Types Wrong?
-            - run: npm run build
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "24"
+          cache: npm
+      - run: npm ci
+      - run: npm run format:check
+      - run: npm run lint
+      - run: npm run typecheck
+      # Also checks the package with publint and Are the Types Wrong?
+      - run: npm run build
 
-    test:
-        name: test (node ${{ matrix.node-version }})
-        runs-on: ubuntu-latest
-        strategy:
-            fail-fast: false
-            matrix:
-                node-version: ['22', '24', '26']
-        steps:
-            - uses: actions/checkout@v7
-            - uses: actions/setup-node@v7
-              with:
-                  node-version: ${{ matrix.node-version }}
-                  cache: npm
-            - run: npm ci
-            - run: npm test
-            - run: node test/smoke.mjs
+  test:
+    name: test (node ${{ matrix.node-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: ["22", "24", "26"]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: node test/smoke.mjs
 
-    # Vitest needs Node 22+, so older supported versions only load and smoke test the build
-    smoke:
-        name: smoke (node ${{ matrix.node-version }})
-        runs-on: ubuntu-latest
-        strategy:
-            fail-fast: false
-            matrix:
-                node-version: ['18', '20']
-        steps:
-            - uses: actions/checkout@v7
-            - uses: actions/setup-node@v7
-              with:
-                  node-version: '24'
-                  cache: npm
-            - run: npm ci
-            - run: npm run build
-            - uses: actions/setup-node@v7
-              with:
-                  node-version: ${{ matrix.node-version }}
-            - run: node --version
-            - run: node test/smoke.mjs
+  # Vitest needs Node 22+, so older supported versions only load and smoke test the build
+  smoke:
+    name: smoke (node ${{ matrix.node-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: ["18", "20"]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "24"
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - uses: actions/setup-node@v7
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: node --version
+      - run: node test/smoke.mjs
 
-    browser:
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v7
-            - uses: actions/setup-node@v7
-              with:
-                  node-version: '24'
-                  cache: npm
-            - run: npm ci
-            - run: npx playwright install --with-deps chromium firefox webkit
-            - run: npm run test:browser
+  browser:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "24"
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium firefox webkit
+      - run: npm run test:browser

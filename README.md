@@ -11,10 +11,10 @@ ordinal numbers.
 
 ```js
 // ES modules
-import { toWords } from 'number-to-words';
+import { toWords } from "number-to-words";
 
 // CommonJS
-const { toWords } = require('number-to-words');
+const { toWords } = require("number-to-words");
 ```
 
 In a browser without a bundler, a script tag defines a global `numberToWords`:
@@ -22,7 +22,7 @@ In a browser without a bundler, a script tag defines a global `numberToWords`:
 ```html
 <script src="https://unpkg.com/number-to-words@2"></script>
 <script>
-    numberToWords.toWords(13); // => “thirteen”
+  numberToWords.toWords(13); // => “thirteen”
 </script>
 ```
 
@@ -42,7 +42,7 @@ Converts an integer into a string with an ordinal postfix.
 If number is decimal, the decimals will be removed.
 
 ```js
-var converter = require('number-to-words');
+var converter = require("number-to-words");
 converter.toOrdinal(21); // => “21st”
 ```
 
@@ -52,7 +52,7 @@ Converts an integer into words.
 If number is decimal, the decimals will be removed.
 
 ```js
-var converter = require('number-to-words');
+var converter = require("number-to-words");
 converter.toWords(13); // => “thirteen”
 
 // Decimal numbers:
@@ -71,7 +71,7 @@ Converts a number into ordinal words.
 If number is decimal, the decimals will be removed.
 
 ```js
-var converter = require('number-to-words');
+var converter = require("number-to-words");
 converter.toWordsOrdinal(21); // => “twenty-first”
 ```
 
